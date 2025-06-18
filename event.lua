@@ -2,8 +2,12 @@ local event = GRAAL.Event
 
 local dataSaved = GRAAL.Data.saved
 local honor = GRAAL.Data.honor
+local units = GRAAL.Data.UNITS
+local ICONS = GRAAL.Data.ICONS
 
-local SetHonorGame = GRAAL.BG.AV.SetHonorGame
+local Get = GRAAL.Utils.Get
+
+local SetHonorGame = GRAAL.BG.AV.Component.SetHonorGame
 ---
 
 local logoutEvent = "PLAYER_LOGOUT"
@@ -12,7 +16,7 @@ local function LogoutAction() SaveBeforeLogout() end
 
 local bgStatusEvent = "UPDATE_BATTLEFIELD_STATUS"
 local function resetHpBar()
-    for index, unitInfo in ipairs(unitInfoList) do
+    for index, unitInfo in ipairs(units) do
         local frame = Get(unitInfo.name.."HealthFrame")
         frame.healthBar:SetMinMaxValues(0, 100)
         frame.healthBar:SetValue(100)
@@ -34,7 +38,7 @@ local function RefreshHonorDuringGame(honorMessage)
     local newHonor = string.match(honorMessage, "(%d+) points? d'honneur.") or string.match(honorMessage, "Points? d'honneur estimés : (%d+)") 
     if newHonor then SetHonorGame(honor.duringGame + tonumber(newHonor)) end
 end
-local function ChatHonorAction() RefreshHonorDuringGame(message) end
+local function ChatHonorAction(message) RefreshHonorDuringGame(message) end
 
 event.ListenEvent = function()
     local eventFrame = CreateFrame("Frame")
@@ -45,7 +49,7 @@ event.ListenEvent = function()
     eventFrame:SetScript("OnEvent", function(self, event, message)
         if event == logoutEvent then LogoutAction()
         elseif event == bgStatusEvent then BgStatusAction()
-        elseif event == chatHonorEvent then ChatHonorAction()
+        elseif event == chatHonorEvent then ChatHonorAction(message)
         end
     end)
 end

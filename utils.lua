@@ -16,7 +16,13 @@ end
 
 utils.Logger = function(message) print("<Graal> "..message) end
 
-utils.GetIconText = function(nameIcon, size)
+utils.GetIcon = function(nameIcon, format, size)
     size = size or {w=16,h=16,x=0,y=0}
-    return "|TInterface\\ICONS\\".. nameIcon ..":".. size.w ..":".. size.h ..":".. size.x ..":".. size.y .."|t"
+    format = format or 'texture'
+    if format == 'text' then return "|TInterface\\ICONS\\".. nameIcon ..":".. size.w ..":".. size.h ..":".. size.x ..":".. size.y .."|t" end
+    return "Interface\\ICONS\\".. nameIcon
+end
+
+utils.GetTargetingFrame = function(nameTargetingFrame)
+    return "Interface\\TARGETINGFRAME\\".. nameTargetingFrame
 end

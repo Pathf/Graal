@@ -16,7 +16,6 @@ data.COLORS = {
     YELLOW_TITLE = {r=1,g=0.82,b=0},
     CYAN = {r=0,g=1,b=1}
 }
-local C = data.COLORS
 
 data.ICONS = {
     HUMAN= { M="achievement_character_human_male", F="inv_misc_head_human_02" },
@@ -27,21 +26,23 @@ data.ICONS = {
     KEY = "INV_Misc_Key_14",
     CHEST_LOCK = "inv_misc_ornatebox"
 }
-local ICONS = data.ICONS
+data.TARGETINGFRAME = {
+    STATUSBAR = "UI-StatusBar"
+}
 
 data.UNITS = {
-    { name= "Vanndar Stormpike", color=C.RED, subname= "Vanndar", icon=ICONS.DWARF.O },            
-    { name= "Commandant Mortimer", color=C.RED, subname= "Mortimer", icon=ICONS.DWARF.M },
-    { name= "Commandant Duffy", color=C.RED, subname= "Duffy", icon=ICONS.DWARF.M },
-    { name= "Commandant Karl Philips", color=C.PURPLE, subname= "Karl Philips", icon=ICONS.HUMAN.M },      
-    { name= "Capitaine Balinda Stonehearth", color=C.BLUE, subname= "Balinda", icon=ICONS.HUMAN.F },
-    { name= "Lieutenant Lonadin", color=C.BLUE, subname= "Lonadin", icon=ICONS.NIGHTELF.M },           
-    { name= "Lieutenant Spencer", color=C.BLUE, subname= "Spencer", icon=ICONS.HUMAN.M },            
-    { name= "Lieutenant Stouthandle", color=C.BLUE, subname= "Stouthandle", icon=ICONS.DWARF.M },        
-    { name= "Lieutenant Largent", color=C.BLUE, subname= "Largent", icon=ICONS.HUMAN.M },            
-    { name= "Lieutenant Mancuso", color=C.BLUE, subname= "Mancuso", icon=ICONS.HUMAN.M },             
-    { name= "Commandant Randolph", color=C.BLUE, subname= "Randolph", icon=ICONS.NIGHTELF.M },          
-    { name= "Lieutenant Greywand", color=C.BLUE, subname= "Greywand", icon=ICONS.GNOME.M }
+    { name= "Vanndar Stormpike", color=data.COLORS.RED, subname= "Vanndar", icon=data.ICONS.DWARF.O },            
+    { name= "Commandant Mortimer", color=data.COLORS.RED, subname= "Mortimer", icon=data.ICONS.DWARF.M },
+    { name= "Commandant Duffy", color=data.COLORS.RED, subname= "Duffy", icon=data.ICONS.DWARF.M },
+    { name= "Commandant Karl Philips", color=data.COLORS.PURPLE, subname= "Karl Philips", icon=data.ICONS.HUMAN.M },      
+    { name= "Capitaine Balinda Stonehearth", color=data.COLORS.BLUE, subname= "Balinda", icon=data.ICONS.HUMAN.F },
+    { name= "Lieutenant Lonadin", color=data.COLORS.BLUE, subname= "Lonadin", icon=data.ICONS.NIGHTELF.M },           
+    { name= "Lieutenant Spencer", color=data.COLORS.BLUE, subname= "Spencer", icon=data.ICONS.HUMAN.M },            
+    { name= "Lieutenant Stouthandle", color=data.COLORS.BLUE, subname= "Stouthandle", icon=data.ICONS.DWARF.M },        
+    { name= "Lieutenant Largent", color=data.COLORS.BLUE, subname= "Largent", icon=data.ICONS.HUMAN.M },            
+    { name= "Lieutenant Mancuso", color=data.COLORS.BLUE, subname= "Mancuso", icon=data.ICONS.HUMAN.M },             
+    { name= "Commandant Randolph", color=data.COLORS.BLUE, subname= "Randolph", icon=data.ICONS.NIGHTELF.M },          
+    { name= "Lieutenant Greywand", color=data.COLORS.BLUE, subname= "Greywand", icon=data.ICONS.GNOME.M }
 }
 
 

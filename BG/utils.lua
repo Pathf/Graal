@@ -14,6 +14,6 @@ utils.GetTimeInBGString = function(beforeText,afterText)
     beforeText = beforeText or ''
     afterText = afterText or ''
     local time = utils.GetCurrentTimeInBG()
-    local text = Ternary(time.minutes < 1, string.format("%02dsec", time.seconds), string.format("%02dmin", time.minutes))
+    local text = Ternary(time.minutes < 1, string.format("%01dsec", time.seconds), string.format("%01dmin", time.minutes))
     return beforeText .. text .. afterText
 end
