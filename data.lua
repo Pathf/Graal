@@ -37,11 +37,11 @@ data.UNITS = {
     { name= "Commandant Karl Philips", color=data.COLORS.PURPLE, subname= "Karl Philips", icon=data.ICONS.HUMAN.M },      
     { name= "Capitaine Balinda Stonehearth", color=data.COLORS.BLUE, subname= "Balinda", icon=data.ICONS.HUMAN.F },
     { name= "Lieutenant Lonadin", color=data.COLORS.BLUE, subname= "Lonadin", icon=data.ICONS.NIGHTELF.M },           
-    { name= "Lieutenant Spencer", color=data.COLORS.BLUE, subname= "Spencer", icon=data.ICONS.HUMAN.M },            
+    { name= "Commandant Randolph", color=data.COLORS.BLUE, subname= "Randolph", icon=data.ICONS.NIGHTELF.M },       
     { name= "Lieutenant Stouthandle", color=data.COLORS.BLUE, subname= "Stouthandle", icon=data.ICONS.DWARF.M },        
     { name= "Lieutenant Largent", color=data.COLORS.BLUE, subname= "Largent", icon=data.ICONS.HUMAN.M },            
     { name= "Lieutenant Mancuso", color=data.COLORS.BLUE, subname= "Mancuso", icon=data.ICONS.HUMAN.M },             
-    { name= "Commandant Randolph", color=data.COLORS.BLUE, subname= "Randolph", icon=data.ICONS.NIGHTELF.M },          
+    { name= "Lieutenant Spencer", color=data.COLORS.BLUE, subname= "Spencer", icon=data.ICONS.HUMAN.M },            
     { name= "Lieutenant Greywand", color=data.COLORS.BLUE, subname= "Greywand", icon=data.ICONS.GNOME.M }
 }
 

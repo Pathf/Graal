@@ -6,6 +6,7 @@ local units = GRAAL.Data.UNITS
 local ICONS = GRAAL.Data.ICONS
 
 local Get = GRAAL.Utils.Get
+local GetIcon = GRAAL.Utils.GetIcon
 
 local SetHonorGame = GRAAL.BG.AV.Component.SetHonorGame
 ---
@@ -20,7 +21,7 @@ local function resetHpBar()
         local frame = Get(unitInfo.name.."HealthFrame")
         frame.healthBar:SetMinMaxValues(0, 100)
         frame.healthBar:SetValue(100)
-        frame.text:SetText(GetIconText(ICONS.INTEROGATION).." -> " .. unitInfo.subname)
+        frame.text:SetText(GetIcon(ICONS.INTEROGATION, 'text').." -> " .. unitInfo.subname)
     end
 end
 local function BgStatusAction()
