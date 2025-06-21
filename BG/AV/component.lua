@@ -14,6 +14,8 @@ local GetTargetingFrame = GRAAL.Utils.GetTargetingFrame
 local TableSize = GRAAL.Utils.TableSize
 local Ternary = GRAAL.Utils.Ternary
 
+local CreateButton = GRAAL.Ui.CreateButton
+
 local GetTimeInBGString = GRAAL.BG.Utils.GetTimeInBGString
 ---
 
@@ -131,6 +133,28 @@ local function CreateAllBossFrame(frameParent)
     end
 end
 
+local function CreateAvBossMinimapButton(frame)
+    local onEnter = function(self)
+        GameTooltip:SetOwner(self, "ANCHOR_LEFT")
+        GameTooltip:AddLine("AV Boss Tracker")
+        GameTooltip:AddLine("Clic gauche: Ouvrir/Fermer")
+        GameTooltip:Show()
+    end
+    local onLeave = function() GameTooltip:Hide() end
+    local onDragStart = function(self) self:StartMoving() end
+    local onDragStop = function(self) self:StopMovingOrSizing() end
+    local onClick = function(self, button) if button == "LeftButton" then if frame and frame:IsShown() then frame:Hide() else frame:Show() end end end
+    local minimapButton = CreateButton({
+      name= "AvBossMinimapButton",
+      frameParent= Minimap,
+      size= { w= 25, h= 25 },
+      movable=true,
+      point= { xf= "TOPLEFT", yf= "TOPLEFT", x= 0, y= 0 },
+      icon= { name=ICONS.BANNER_HORDE, minimap=true },
+      script= { onDragStart=onDragStart, onDragStop=onDragStop, onClick=onClick, onLeave=onLeave, onEnter=onEnter}, 
+    })
+end
+
 component.CreateBossBox = function()
     local numberBoss = TableSize(UNITS)
     local heightFrame = (numberBoss * 20) + 40
@@ -144,22 +168,6 @@ component.CreateBossBox = function()
     bossBoxFrame:SetClampedToScreen(true)
     bossBoxFrame:SetFrameStrata("MEDIUM")
     bossBoxFrame:SetFrameLevel(5)
-
-    local reopen = CreateFrame("Button", "ReopenAVB", UIParent, "UIPanelButtonTemplate")
-    reopen:SetSize(80, 20)
-    reopen:SetPoint("CENTER", UIParent, "TOP", 0, 0)
-    reopen:SetMovable(true)
-    reopen:SetClampedToScreen(true)
-    reopen:EnableMouse(true)
-    reopen:RegisterForDrag("LeftButton")
-    reopen:SetText("Reopen AVB")
-    reopen:SetScript("OnDragStart", function(self) self:StartMoving() end)
-    reopen:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
-    reopen:SetScript("OnClick", function() 
-        bossBoxFrame:Show()
-        reopen:Hide()
-    end)
-    reopen:Hide()
 
     bossBoxFrame.title = bossBoxFrame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     bossBoxFrame.title:SetPoint("TOP", bossBoxFrame, "TOP", 0, -10)
@@ -180,10 +188,7 @@ component.CreateBossBox = function()
     
     bossBoxFrame.closeButton = Get("BossBoxFrameClose")
     bossBoxFrame.closeButton:SetPoint("TOPRIGHT", bossBoxFrame, "TOPRIGHT", 2, 0)
-    bossBoxFrame.closeButton:SetScript("OnClick", function(self) 
-        bossBoxFrame:Hide()
-        reopen:Show()
-    end)
+    bossBoxFrame.closeButton:SetScript("OnClick", function(self) bossBoxFrame:Hide() end)
 
     bossBoxFrame.lockButton = CreateFrame("Button", nil, bossBoxFrame, "UIPanelButtonTemplate")
     bossBoxFrame.lockButton:SetSize(18, 18)
@@ -197,6 +202,7 @@ component.CreateBossBox = function()
     SetLockedState(bossBoxFrame, bossBoxPosition.locked)
     
     CreateAllBossFrame(bossBoxFrame)
+    CreateAvBossMinimapButton(bossBoxFrame)
 
     bossBoxFrame:SetScript("OnUpdate", function(self, delta)
         elapsed = elapsed + delta

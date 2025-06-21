@@ -1,3 +1,14 @@
+-- En cours de dev :
+-- - plus petit
+
+-- TODO :
+-- - Cimetiere lieux d'interet + décompte
+-- - customisation
+-- - stat du honneur / temps
+
+-- TODO mais compliqué :
+-- - Taunted (UnitTarget pas pris en compte dans classic)
+
 local ResetData = GRAAL.Data.ResetData
 
 local Get = GRAAL.Utils.Get
@@ -5,7 +16,6 @@ local Logger = GRAAL.Utils.Logger
 
 local CreateBossBox = GRAAL.BG.AV.Component.CreateBossBox
 local Reset = GRAAL.BG.AV.Component.Reset
-
 
 local ListenEvent = GRAAL.Event.ListenEvent
 ---------------------------------

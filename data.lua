@@ -24,7 +24,8 @@ data.ICONS = {
     NIGHTELF= { M="achievement_character_nightelf_male" },
     INTEROGATION = "inv_misc_questionmark",
     KEY = "INV_Misc_Key_14",
-    CHEST_LOCK = "inv_misc_ornatebox"
+    CHEST_LOCK = "inv_misc_ornatebox",
+    BANNER_HORDE = "inv_bannerpvp_01"
 }
 data.TARGETINGFRAME = {
     STATUSBAR = "UI-StatusBar"
