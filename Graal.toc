@@ -2,7 +2,7 @@
 ## Title : Graal
 ## Author : Pathf
 ## Notes : Possiblement un vase, une coupe, un récipient, une pierre incandescente, un bocal à anchois ou une corne d'abondance.
-## Version : 0.9
+## Version : 1.0
 
 core.lua
 
@@ -10,9 +10,13 @@ data.lua
 utils.lua
 
 UI/button.lua
+UI/text.lua
 
 BG/utils.lua
-BG/AV/component.lua
+BG/AV/minimap.lua
+BG/AV/locationFrame.lua
+BG/AV/bossFrame.lua
+BG/AV/boxBossFrame.lua
 
 event.lua
 main.lua

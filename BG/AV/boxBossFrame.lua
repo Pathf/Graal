@@ -1,0 +1,155 @@
+local av = GRAAL.BG.AV
+
+local honor = GRAAL.Data.honor
+local elapsed = GRAAL.Data.elapsed
+local UNITS = GRAAL.Data.UNITS
+local COLORS = GRAAL.Data.COLORS
+local ICONS = GRAAL.Data.ICONS
+local dataSaved = GRAAL.Data.saved
+
+local Get = GRAAL.Utils.Get
+local GetIcon = GRAAL.Utils.GetIcon
+local TableSize = GRAAL.Utils.TableSize
+local Ternary = GRAAL.Utils.Ternary
+
+local CreateButton = GRAAL.Ui.CreateButton
+local CreateText = GRAAL.Ui.CreateText
+
+local GetTimeInBGString = GRAAL.BG.Utils.GetTimeInBGString
+---
+
+local function SetLockedState(frame, locked)
+    frame.lockButton:SetNormalTexture(Ternary(locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
+end
+
+local function SetMovableState(frame, movable, position)
+    if movable then
+        frame:EnableMouse(true)
+        frame:RegisterForDrag("LeftButton")
+        frame:SetScript("OnDragStart", function(self) self:StartMoving() end)
+        frame:SetScript("OnDragStop", function(self)
+            self:StopMovingOrSizing()
+            local _, _, _, x, y = self:GetPoint()
+            position.x = x
+            position.y = y
+        end)
+    else
+        frame:EnableMouse(false)
+        frame:SetScript("OnDragStart", nil)
+        frame:SetScript("OnDragStop", nil)
+    end
+end
+
+local function CreateCloseButton(bossBoxFrame)
+    local closeButton = Get("BossBoxFrameClose")
+    closeButton:SetPoint("TOPRIGHT", bossBoxFrame, "TOPRIGHT", 2, 0)
+    closeButton:SetScript("OnClick", function(self) bossBoxFrame:Hide() end)
+end
+
+local function CreateLockButton(frame, frameState)
+    local onClick = function()
+        frameState.locked = not frameState.locked
+        SetMovableState(frame, not frameState.locked, frameState)
+        SetLockedState(frame, frameState.locked)
+    end
+    local lockButton = CreateButton({
+        template = "UIPanelButtonTemplate",
+        name= "AvBossLockButton",
+        frameParent= frame,
+        size= { w= 18, h= 18 },
+        point= { xf= "TOPLEFT", yf= "TOPLEFT", x= 8.5, y= -6 },
+        script= { onClick=onClick}
+    })
+    SetMovableState(frame, not frameState.locked, frameState)
+    lockButton:SetNormalTexture(Ternary(locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
+    return lockButton
+end
+
+local function CreateHonorDuringGame(frame)
+    return CreateText({
+        frameParent= frame,
+        font= "GameFontHighlight",
+        point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 15 },
+        color=COLORS.YELLOW_TITLE,
+        text=honor.duringGame.." honor",
+        hide=false
+    })
+end
+
+local function CreateTimer(frame)
+    return CreateText({
+        frameParent= frame,
+        font= "GameFontHighlight",
+        point= { xf= "BOTTOMRIGHT", yf= "BOTTOMRIGHT", x= -15, y= 15 },
+        color=COLORS.YELLOW_TITLE,
+        hide=false
+    })
+end
+
+local function CreateTitle(frame)
+    return CreateText({
+        frameParent= frame,
+        font= "GameFontNormal",
+        point= { xf= "TOP", yf= "TOP", x= 0, y= -10 },
+        text= "AV - Boss"
+    })
+end
+
+local function CheckRaiderView(boss, unitInfo)
+    local bossName, bossSubName, frame = unitInfo.name, unitInfo.subname, unitInfo.frame
+    local hp, maxHp, percentage = UnitHealth(boss), UnitHealthMax(boss), 100
+    if maxHp and maxHp > 0 then percentage = hp / maxHp * 100 end
+    frame.healthBar:SetMinMaxValues(0, maxHp)
+    frame.healthBar:SetValue(hp)
+    frame.text:SetText(GetIcon(unitInfo.icon, 'text') .. " -> " .. string.format("%s - %d%%", bossSubName, percentage))
+    frame.iconEye:Show()
+    return true
+end
+
+local function UpdateBossHealth(unitInfo)
+    local hasRaiderView, hasBossAgro = false, false
+    for i = 1, 40 do
+        local boss = "raid" .. i .. "target"
+        if UnitExists(boss) and UnitName(boss) == unitInfo.name then
+            hasRaiderView = CheckRaiderView(boss, unitInfo)
+        end
+    end
+    if not hasRaiderView then unitInfo.frame.iconEye:Hide() end
+end
+
+av.CreateBossBox = function()
+    local numberBoss = TableSize(UNITS)
+    local heightFrame = (numberBoss * 20) + 32
+    local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"], { x = -10, y = -10, locked = false })
+    dataSaved["bossBoxPosition"] = bossBoxPosition
+
+    local bossBoxFrame = CreateFrame("Frame", "BossBoxFrame", UIParent, "UIPanelDialogTemplate")
+    bossBoxFrame:SetSize(360/2, heightFrame)
+    bossBoxFrame:SetPoint("CENTER", UIParent, "TOPRIGHT", bossBoxPosition.x, bossBoxPosition.y)
+    bossBoxFrame:SetMovable(true)
+    bossBoxFrame:SetClampedToScreen(true)
+    bossBoxFrame:SetFrameStrata("MEDIUM")
+    bossBoxFrame:SetFrameLevel(5)
+
+    bossBoxFrame.title = CreateTitle(bossBoxFrame)
+    bossBoxFrame.honorDuringGame = CreateHonorDuringGame(bossBoxFrame)
+    bossBoxFrame.timer = CreateTimer(bossBoxFrame)
+    bossBoxFrame.closeButton = CreateCloseButton(bossBoxFrame)
+    bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)
+    
+    GRAAL.BG.AV.CreateAllBossFrame(bossBoxFrame)
+    GRAAL.BG.AV.CreateAllLocationFrame(bossBoxFrame)
+    GRAAL.BG.AV.CreateAvBossMinimapButton(bossBoxFrame)
+
+    bossBoxFrame:SetScript("OnUpdate", function(self, delta)
+        elapsed = elapsed + delta
+        if elapsed >= 0.5 then
+            for _,unitInfo in ipairs(UNITS) do 
+                UpdateBossHealth(unitInfo)
+            end
+            bossBoxFrame.timer:SetText(GetTimeInBGString())
+            
+            elapsed = 0
+        end
+    end)
+end

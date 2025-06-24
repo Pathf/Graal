@@ -1,9 +1,9 @@
 -- CONFIG BUTTON
 local functionExample = function() print("test") end
 local configButtonExample = {
-    name= "ExampleButton", -- *
     frameParent= UIParent, -- *
     point= { xf= "CENTER", yf= "TOP", x= 0, y= 0 }, -- *
+    name= "ExampleButton",
     template= "UIPanelButtonTemplate",
     size= { w= 80, h= 20 },
     movable=true,
@@ -29,7 +29,7 @@ local function ConfSize(button, size)
     button:SetSize(size.w, size.h)
 end
 
-local function ConfPoint(button, point)
+local function ConfPoint(button, frameParent, point)
     point = point or { xf="CENTER", yf="CENTER", x=0, y=0 }
     button:SetPoint(point.xf, frameParent, point.yf, point.x, point.y)
 end
@@ -73,7 +73,7 @@ end
 GRAAL.Ui.CreateButton = function(config)
     local button = CreateFrameForButton(config.name, config.frameParent, config.template)
     ConfSize(button, config.size)
-    ConfPoint(button, config.point)
+    ConfPoint(button, config.frameParent, config.point)
     ConfMovable(button, config.movable)
     if config.text then button:SetText(config.text) end
     if config.icon then ConfigIcon(button, config.icon) end

@@ -27,6 +27,15 @@ data.ICONS = {
     CHEST_LOCK = "inv_misc_ornatebox",
     BANNER_HORDE = "inv_bannerpvp_01"
 }
+
+data.POIIcon = {
+    --GRAVEYARD={l=,r=,t=,b=},
+    --GRAVEYARD_ALLY={l=,r=,t=,b=},
+    --GRAVEYARD_ALLY_INFORCE={l=,r=,t=,b=},
+    --GRAVEYARD_HORDE={l=,r=,t=,b=},
+    --GRAVEYARD_HORDE_INFORCE={l=,r=,t=,b=}
+}
+
 data.TARGETINGFRAME = {
     STATUSBAR = "UI-StatusBar"
 }
@@ -46,6 +55,19 @@ data.UNITS = {
     { name= "Lieutenant Greywand", color=data.COLORS.BLUE, subname= "Greywand", icon=data.ICONS.GNOME.M }
 }
 
+data.Location = {
+    --{ name= "tour", color=data.COLORS.RED, subname= "Vanndar", poiicon= } -- Interface\\WorldMap\\Skull_64    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+}
 
 data.ResetData = function()
   data.saved = {}
