@@ -29,11 +29,77 @@ data.ICONS = {
 }
 
 data.POIIcon = {
-    --GRAVEYARD={l=,r=,t=,b=},
-    --GRAVEYARD_ALLY={l=,r=,t=,b=},
-    --GRAVEYARD_ALLY_INFORCE={l=,r=,t=,b=},
-    --GRAVEYARD_HORDE={l=,r=,t=,b=},
-    --GRAVEYARD_HORDE_INFORCE={l=,r=,t=,b=}
+    MINE={ l=0.000, r=0.121, t=0.000, b=0.122 },
+    MINE_RED={ l=0.128, r=0.246, t=0.000, b=0.122 },
+    MINE_BLUE={ l=0.253, r=0.371, t=0.000, b=0.122 },
+    GRAVEYARD_BLUE_INFORCE={ l=0.378, r=0.496, t=0.00, b=0.122 },
+    HOME={ l=0.503, r=0.621, t=0.00, b=0.122 },
+    TOWER={ l=0.628, r=0.746, t=0.00, b=0.122 },
+    FLAG={ l=0.753, r=0.871, t=0.00, b=0.122 },
+    GRAVEYARD={ l=0.878, r=1.000, t=0.00, b=0.122 },
+    
+    TOWER_BLUE_INFORCE={ l=0.000, r=0.121, t=0.128, b=0.246 },
+    TOWER_RED={ l=0.128, r=0.246, t=0.128, b=0.249 }, 
+    TOWER_BLUE={ l=0.253, r=0.371, t=0.128, b=0.249 },
+    TOWER_RED_INFORCE={ l=0.378, r=0.546, t=0.128, b=0.249 },
+    GRAVEYARD_RED={ l=0.503, r=0.621, t=0.128, b=0.249 },
+    GRAVEYARD_RED_INFORCE={ l=0.628, r=0.746, t=0.128, b=0.249 },
+    GRAVEYARD_BLUE={ l=0.753, r=0.871, t=0.128, b=0.249 },
+    --none={ l=0.878, r=1.000, t=0.128, b=0.249 },
+
+    STONE={ l=0.000, r=0.121, t=0.253, b=0.374 },
+    STONE_BLUE_INFOCE={ l=0.128, r=0.246, t=0.253, b=0.374 },
+    STONE_BLUE={ l=0.253, r=0.371, t=0.253, b=0.374 },
+    STONE_RED_INFOCE={ l=0.378, r=0.546, t=0.253, b=0.374 },
+    STONE_RED={ l=0.503, r=0.621, t=0.253, b=0.374 },
+    SAWMILLS={ l=0.628, r=0.746, t=0.253, b=0.374 },
+    SAWMILLS_BLUE_INFOCE={ l=0.753, r=0.871, t=0.253, b=0.374 },
+    SAWMILLS_BLUE={ l=0.878, r=1.000, t=0.253, b=0.374 },
+
+    SAWMILLS_RED_INFOCE={ l=0.000, r=0.121, t=0.378, b=0.499 },
+    SAWMILLS_RED={ l=0.128, r=0.246, t=0.378, b=0.499 },
+    FORGE={ l=0.253, r=0.371, t=0.378, b=0.499 },
+    FORGE_BLUE_INFOCE={ l=0.378, r=0.546, t=0.378, b=0.499 },
+    FORGE_BLUE={ l=0.503, r=0.621, t=0.378, b=0.499 },
+    FORGE_RED_INFOCE={ l=0.628, r=0.746, t=0.378, b=0.499 },
+    FORGE_RED={ l=0.753, r=0.871, t=0.378, b=0.499 },
+    FARM={ l=0.878, r=1.000, t=0.378, b=0.499 },
+
+    FARM_BLUE_INFOCE={ l=0.000, r=0.121, t=0.503, b=0.624 },
+    FARM_BLUE={ l=0.128, r=0.246, t=0.503, b=0.624 },
+    FARM_RED_INFOCE={ l=0.253, r=0.371, t=0.503, b=0.624 },
+    FARM_RED={ l=0.378, r=0.546, t=0.503, b=0.624 },
+    STABLE={ l=0.503, r=0.621, t=0.503, b=0.624 },
+    STABLE_BLUE_INFOCE={ l=0.628, r=0.746, t=0.503, b=0.624 },
+    STABLE_BLUE={ l=0.753, r=0.871, t=0.503, b=0.624 },
+    STABLE_RED_INFOCE={ l=0.878, r=1.000, t=0.503, b=0.624 },
+
+    STABLE_RED={ l=0.000, r=0.121, t=0.628, b=0.749 },
+    SKULL={ l=0.128, r=0.246, t=0.628, b=0.749 },
+    BOSS={ l=0.253, r=0.371, t=0.628, b=0.749 },
+    -- none={ l=0.378, r=0.546, t=0.628, b=0.749 },
+    -- none={ l=0.503, r=0.621, t=0.628, b=0.749 },
+    -- none={ l=0.628, r=0.746, t=0.628, b=0.749 },
+    -- none={ l=0.753, r=0.871, t=0.628, b=0.749 },
+    -- none={ l=0.878, r=1.000, t=0.628, b=0.749 },
+
+    -- none={ l=0.000, r=0.125, t=0.75, b=0.824 },
+    -- none={ l=0.125, r=0.250, t=0.75, b=0.824 },
+    -- none={ l=0.250, r=0.375, t=0.75, b=0.824 },
+    -- none={ l=0.375, r=0.500, t=0.75, b=0.824 },
+    -- none={ l=0.500, r=0.625, t=0.75, b=0.824 },
+    -- none={ l=0.625, r=0.750, t=0.75, b=0.824 },
+    -- none={ l=0.750, r=0.875, t=0.75, b=0.824 },
+    -- none={ l=0.875, r=1.000, t=0.75, b=0.824 },
+
+    -- none={ l=0.000, r=0.125, t=0.825, b=1.00 }, 
+    -- none={ l=0.125, r=0.250, t=0.825, b=1.00 }, 
+    -- none={ l=0.250, r=0.375, t=0.825, b=1.00 }, 
+    -- none={ l=0.375, r=0.500, t=0.825, b=1.00 }, 
+    -- none={ l=0.500, r=0.625, t=0.825, b=1.00 }, 
+    -- none={ l=0.625, r=0.750, t=0.825, b=1.00 }, 
+    -- none={ l=0.750, r=0.875, t=0.825, b=1.00 }, 
+    -- none={ l=0.875, r=1.000, t=0.825, b=1.00 }  
 }
 
 data.TARGETINGFRAME = {
@@ -56,17 +122,12 @@ data.UNITS = {
 }
 
 data.Location = {
-    --{ name= "tour", color=data.COLORS.RED, subname= "Vanndar", poiicon= } -- Interface\\WorldMap\\Skull_64    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    AV={
+        {name="tour ...", color=data.COLORS.RED, subname="", poiicon=data.POIIcon.TOWER_RED_INFORCE},
+        {name="tour ...", color=data.COLORS.BLUE, subname="", poiicon=data.POIIcon.TOWER_BLUE_INFORCE},
+        {name="cimetiere ...", color=data.COLORS.RED, subname="", poiicon=data.POIIcon.GRAVEYARD_RED_INFORCE},
+        {name="cimetiere ...", color=data.COLORS.BLUE, subname="", poiicon=data.POIIcon.GRAVEYARD_BLUE_INFORCE}
+    }
 }
 
 data.ResetData = function()

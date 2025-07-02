@@ -10,6 +10,7 @@
 -- - Taunted (UnitTarget pas pris en compte dans classic)
 
 local ResetData = GRAAL.Data.ResetData
+local POIIcon = GRAAL.Data.POIIcon
 
 local Get = GRAAL.Utils.Get
 local Logger = GRAAL.Utils.Logger
@@ -49,11 +50,8 @@ local function test()
         "Interface\\MINIMAP\\POIIcons", -- Atlas contenant plein d'icônes minimap
         100, 0 -- Position en X/Y
     )
-    frostwolfGraveyardIcon.texture:SetTexCoord(0.00, 0.125, 0.00, 0.124) -- left, right, top, bottom
-
-    -- tour :SetTexCoord(0.625, 0.747, 0.00, 0.125)
-    -- cimetiere horde :SetTexCoord(0.625, 0.75, 0.125, 0.25)
-    -- cimetiere ally :SetTexCoord(0.375, 0.50, 0.00, 0.125)
+    local tmp = POIIcon.a
+    frostwolfGraveyardIcon.texture:SetTexCoord(tmp.l, tmp.r, tmp.t, tmp.b) -- left, right, top, bottom
 
     local tfrostwolfGraveyardIcon = CreatePOIIcon(
         "FrostwolfGYIcon",
