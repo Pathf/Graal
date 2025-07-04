@@ -76,7 +76,7 @@ local function CreateHonorDuringGame(frame)
     })
 end
 
-local function CreateTimer(frame)
+local function CreatePastTimer(frame)
     return CreateText({
         frameParent= frame,
         font= "GameFontHighlight",
@@ -117,14 +117,63 @@ local function UpdateBossHealth(unitInfo)
     if not hasRaiderView then unitInfo.frame.iconEye:Hide() end
 end
 
+local function CreatePositionInformations()
+    local positionInformations = { x=45, yMinInBox=-250, current={}, length=0 }
+    positionInformations.nextPosition = function()
+        return {
+            x = positionInformations.x,
+            y = positionInformations.yMinInBox + (-14 * positionInformations.length)
+        }
+    end
+    positionInformations.add = function(timerOrBoss)
+        table.insert(positionInformations.current, { box=timerOrBoss, name=timerOrBoss.name })
+        positionInformations.length = positionInformations.length + 1 
+    end
+    positionInformations.remove = function(id, frameParent)
+        local oldIndex
+        for index, element in ipairs(positionInformations.current) do
+            if element.name == id then
+                oldIndex = index
+                element.box:Hide()
+                table.remove(positionInformations.current, index)
+                break
+            end
+        end
+        for index, element in ipairs(positionInformations.current) do
+            if oldIndex == index then
+                local y = positionInformations.yMinInBox + (-14 * (oldIndex-1))
+                oldIndex = oldIndex + 1
+                local boxTmp = element.box
+                boxTmp:ClearAllPoints()
+                boxTmp:SetPoint("TOPLEFT", frameParent, "TOPLEFT", positionInformations.x, y) 
+            end
+        end
+        positionInformations.length = positionInformations.length - 1 
+    end
+    positionInformations.exist = function(name)
+        for index, element in ipairs(positionInformations.current) do
+            if element.name == name then return true end
+        end
+        return false
+    end
+    positionInformations.removeAll = function()
+        for index, element in ipairs(positionInformations.current) do
+            element.box:Hide()
+        end
+        positionInformations.current = {}
+        positionInformations.length = 0
+    end
+    return positionInformations
+end
+
 av.CreateBossBox = function()
     local numberBoss = TableSize(UNITS)
-    local heightFrame = (numberBoss * 20) + 32
+    local heightFrame = (numberBoss * 20) + 32 + 100
     local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"], { x = -10, y = -10, locked = false })
     dataSaved["bossBoxPosition"] = bossBoxPosition
 
     local bossBoxFrame = CreateFrame("Frame", "BossBoxFrame", UIParent, "UIPanelDialogTemplate")
-    bossBoxFrame:SetSize(360/2, heightFrame)
+    bossBoxFrame:SetSize(180, heightFrame)
     bossBoxFrame:SetPoint("CENTER", UIParent, "TOPRIGHT", bossBoxPosition.x, bossBoxPosition.y)
     bossBoxFrame:SetMovable(true)
     bossBoxFrame:SetClampedToScreen(true)
@@ -133,12 +182,12 @@ av.CreateBossBox = function()
 
     bossBoxFrame.title = CreateTitle(bossBoxFrame)
     bossBoxFrame.honorDuringGame = CreateHonorDuringGame(bossBoxFrame)
-    bossBoxFrame.timer = CreateTimer(bossBoxFrame)
+    bossBoxFrame.timer = CreatePastTimer(bossBoxFrame)
     bossBoxFrame.closeButton = CreateCloseButton(bossBoxFrame)
     bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)
+    bossBoxFrame.positionInformations = CreatePositionInformations()
     
     GRAAL.BG.AV.CreateAllBossFrame(bossBoxFrame)
-    GRAAL.BG.AV.CreateAllLocationFrame(bossBoxFrame)
     GRAAL.BG.AV.CreateAvBossMinimapButton(bossBoxFrame)
 
     bossBoxFrame:SetScript("OnUpdate", function(self, delta)

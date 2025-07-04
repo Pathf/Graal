@@ -10,7 +10,9 @@ data.lua
 utils.lua
 
 UI/button.lua
+UI/icon.lua
 UI/text.lua
+UI/timer.lua
 
 BG/utils.lua
 BG/AV/minimap.lua
