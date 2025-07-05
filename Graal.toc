@@ -2,7 +2,7 @@
 ## Title : Graal AV
 ## Author : Pathf
 ## Notes : Possiblement un vase, une coupe, un récipient, une pierre incandescente, un bocal à anchois ou une corne d'abondance.
-## Version : 1.3.1
+## Version : 1.3.2
 
 core.lua
 

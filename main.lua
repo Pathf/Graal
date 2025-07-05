@@ -1,8 +1,7 @@
 -- # TODO :
--- statistique sur honor + honor week
 -- plus petit faire en sorte que quand arrivé à 0% les barres disparaise
 -- faire une barre qui decremente pour les timers
--- customisation
+-- customisation : faire en sort que le fond soit transparent
 
 local ResetData = GRAAL.Data.ResetData
 local POIIcon = GRAAL.Data.POIIcon
