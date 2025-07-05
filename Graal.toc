@@ -1,8 +1,8 @@
 ## Interface : 50400
-## Title : Graal
+## Title : Graal AV
 ## Author : Pathf
 ## Notes : Possiblement un vase, une coupe, un récipient, une pierre incandescente, un bocal à anchois ou une corne d'abondance.
-## Version : 1.1.0
+## Version : 1.2.0
 
 core.lua
 
@@ -16,7 +16,6 @@ UI/timer.lua
 
 BG/utils.lua
 BG/AV/minimap.lua
-BG/AV/locationFrame.lua
 BG/AV/bossFrame.lua
 BG/AV/boxBossFrame.lua
 

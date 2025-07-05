@@ -36,7 +36,7 @@ GRAAL.Ui.CreateTimer = function(config)
         frame:SetScript("OnUpdate", function(self, elapsed)
             local remaining = frame.startTime + frame.duration - GetTime()
             if remaining > 0 then
-                local time = GRAAL.Utils.GetTime(remaining*1000)
+                local time = GRAAL.Utils.BuildTime(remaining*1000)
                 local text = Ternary(
                     time.minutes < 1, 
                     string.format("%01d", time.seconds), 

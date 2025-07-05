@@ -69,9 +69,20 @@ local function CreateHonorDuringGame(frame)
     return CreateText({
         frameParent= frame,
         font= "GameFontHighlight",
+        point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 30 },
+        color=COLORS.YELLOW_TITLE,
+        text="Honor: " .. honor.duringGame,
+        hide=false
+    })
+end
+
+local function CreateHonorPerHour(frame)
+    return CreateText({
+        frameParent= frame,
+        font= "GameFontHighlight",
         point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 15 },
         color=COLORS.YELLOW_TITLE,
-        text=honor.duringGame.." honor",
+        text="*/h: " .. honor.session,
         hide=false
     })
 end
@@ -168,7 +179,7 @@ end
 
 av.CreateBossBox = function()
     local numberBoss = TableSize(UNITS)
-    local heightFrame = (numberBoss * 20) + 32 + 100
+    local heightFrame = (numberBoss * 20) + 32 + 120
     local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"], { x = -10, y = -10, locked = false })
     dataSaved["bossBoxPosition"] = bossBoxPosition
 
@@ -182,6 +193,7 @@ av.CreateBossBox = function()
 
     bossBoxFrame.title = CreateTitle(bossBoxFrame)
     bossBoxFrame.honorDuringGame = CreateHonorDuringGame(bossBoxFrame)
+    bossBoxFrame.honorPerHour = CreateHonorPerHour(bossBoxFrame)
     bossBoxFrame.timer = CreatePastTimer(bossBoxFrame)
     bossBoxFrame.closeButton = CreateCloseButton(bossBoxFrame)
     bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)

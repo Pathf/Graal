@@ -2,7 +2,7 @@ local data = GRAAL.Data
 ---
 
 data.elapsed = 0
-data.honor = { duringGame = 0 }
+data.honor = { duringGame = 0, session=0 }
 data.saved = AVBossTrackerSaved or {}
 
 data.COLORS = {

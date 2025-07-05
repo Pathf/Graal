@@ -11,6 +11,7 @@ local GetIcon = GRAAL.Utils.GetIcon
 local EscapePattern = GRAAL.Utils.EscapePattern
 
 local SetHonorGame = GRAAL.BG.Utils.SetHonorGame
+local CalculateHonorPerHour = GRAAL.BG.Utils.CalculateHonorPerHour
 ---
 
 local logoutEvent = "PLAYER_LOGOUT"
@@ -40,7 +41,10 @@ end
 local chatHonorEvent = "CHAT_MSG_COMBAT_HONOR_GAIN"
 local function RefreshHonorDuringGame(honorMessage)
     local newHonor = string.match(honorMessage, "(%d+) points? d'honneur.") or string.match(honorMessage, "Points? d'honneur estimés : (%d+)") 
-    if newHonor then SetHonorGame(honor.duringGame + tonumber(newHonor)) end
+    if newHonor then 
+        SetHonorGame(honor.duringGame + tonumber(newHonor)) 
+        CalculateHonorPerHour(tonumber(newHonor))
+    end
 end
 local function ChatHonorAction(message) RefreshHonorDuringGame(message) end
 

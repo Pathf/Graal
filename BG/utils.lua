@@ -33,9 +33,15 @@ utils.Reset = function()
     end
 end
 
-utils.SetHonorGame = function(honorBeforeGame)
-    honorBeforeGame = honorBeforeGame or 0
-    honor.duringGame = honorBeforeGame
-    local frame = Get("BossBoxFrame")
-    frame.honorDuringGame:SetText(honor.duringGame.." honors")
+utils.SetHonorGame = function(newHonor)
+    newHonor = newHonor or 0
+    honor.duringGame = newHonor
+    Get("BossBoxFrame").honorDuringGame:SetText(honor.duringGame.." honor"..Ternary(honor.duringGame > 1, "s", ""))
+end
+
+utils.CalculateHonorPerHour = function(newHonor)
+    honor.session = honor.session + newHonor
+    local hourSinceStartSession = BuildTime(GetTime()*1000).hours
+    local honorPerHour = honor.session / Ternary(hourSinceStartSession > 1, hourSinceStartSession, 1)
+    Get("BossBoxFrame").honorPerHour:SetText("Honor/h: " .. honorPerHour)
 end

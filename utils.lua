@@ -32,10 +32,11 @@ utils.EscapePattern = function(s)
     return s:gsub("([%%%^%$%(%)%.%[%]%*%+%-%?])", "%%%1")
 end
 
-utils.GetTime =  function(milliseconds)
+utils.BuildTime =  function(milliseconds)
     if milliseconds == 0 then return { minutes= 0, seconds= 0 } end
     local totalSeconds = math.floor(milliseconds / 1000)
-    local minutes = math.floor(totalSeconds / 60)
     local seconds = totalSeconds % 60
-    return { minutes= minutes, seconds= seconds }
+    local minutes = math.floor(totalSeconds / 60)
+    local hours = math.floor(minutes/60)
+    return { hours=hours, minutes=minutes, seconds=seconds }
 end
