@@ -11,6 +11,17 @@ local TableSize = GRAAL.Utils.TableSize
 
 local CreateText = GRAAL.Ui.CreateText
 ---
+local function CreateHealthBar(frame, color)
+    local healthBar = CreateFrame("StatusBar", nil, frame)
+    healthBar:SetAllPoints()
+    healthBar:SetStatusBarTexture(GetTargetingFrame(TARGETINGFRAME.STATUSBAR))
+    healthBar:SetStatusBarColor(color.r, color.g, color.b)
+    healthBar:SetMinMaxValues(0, 100)
+    healthBar:SetValue(100)
+    healthBar:SetFrameStrata("MEDIUM")
+    healthBar:SetFrameLevel(5)
+    return healthBar
+end
 
 local function CreateLabel(frame, subname)
     return CreateText({
@@ -35,14 +46,7 @@ local function CreateBossFrame(index, frameParent)
     frame:SetFrameStrata("MEDIUM")
     frame:SetFrameLevel(5)
 
-    frame.healthBar = CreateFrame("StatusBar", nil, frame)
-    frame.healthBar:SetAllPoints()
-    frame.healthBar:SetStatusBarTexture(GetTargetingFrame(TARGETINGFRAME.STATUSBAR))
-    frame.healthBar:SetStatusBarColor(color.r, color.g, color.b)
-    frame.healthBar:SetMinMaxValues(0, 100)
-    frame.healthBar:SetValue(100)
-    frame.healthBar:SetFrameStrata("MEDIUM")
-    frame.healthBar:SetFrameLevel(5)
+    frame.healthBar = CreateHealthBar(frame, color)
     
     frame.textFrame = CreateFrame("Frame", nil, frame)
     frame.textFrame:SetAllPoints()

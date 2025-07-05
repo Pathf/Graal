@@ -2,6 +2,7 @@ local utils = GRAAL.BG.Utils
 local Ternary = GRAAL.Utils.Ternary
 local honor = GRAAL.Data.honor
 local Get = GRAAL.Utils.Get
+local BuildTime = GRAAL.Utils.BuildTime
 ---
 utils.GetCurrentTimeInBG =  function()
     local milliseconds = GetBattlefieldInstanceRunTime()
@@ -41,7 +42,7 @@ end
 
 utils.CalculateHonorPerHour = function(newHonor)
     honor.session = honor.session + newHonor
-    local hourSinceStartSession = BuildTime(GetTime()*1000).hours
+    local hourSinceStartSession = BuildTime(GetTime()).hours
     local honorPerHour = honor.session / Ternary(hourSinceStartSession > 1, hourSinceStartSession, 1)
     Get("BossBoxFrame").honorPerHour:SetText("Honor/h: " .. honorPerHour)
 end
