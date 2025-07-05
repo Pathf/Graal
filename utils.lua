@@ -14,7 +14,13 @@ utils.Ternary = function(condition, trueResult, falseResult)
     return falseResult
 end
 
-utils.Logger = function(message) print("<Graal> "..message) end
+utils.Logger = function(...)
+    local message = "<Graal> "
+    for _, element in ipairs{...} do
+        message = message .. element
+    end
+    print(message) 
+end
 --Logger = utils.Logger
 
 utils.GetIcon = function(nameIcon, format, size)

@@ -66,25 +66,25 @@ local function CreateLockButton(frame, frameState)
 end
 
 local function CreateHonorDuringGame(frame)
-    return CreateText({
-        frameParent= frame,
-        font= "GameFontHighlight",
-        point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 30 },
-        color=COLORS.YELLOW_TITLE,
-        text="Honor: " .. honor.duringGame,
-        hide=false
-    })
-end
-
-local function CreateHonorPerHour(frame)
-    return CreateText({
+    local honorDuring = CreateText({
         frameParent= frame,
         font= "GameFontHighlight",
         point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 15 },
         color=COLORS.YELLOW_TITLE,
-        text="*/h: " .. honor.session,
+        text="Honor: " .. honor.duringGame,
         hide=false
     })
+    honorDuring:SetScript("OnEnter", function(self)
+        local hourSinceStartSession = GRAAL.Utils.BuildTime(GetTime()).hours
+        local honorPerHour = honor.session / Ternary(hourSinceStartSession > 1, hourSinceStartSession, 1)
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        GameTooltip:SetText("Honor/h: " .. honorPerHour, 1, 1, 1)
+        GameTooltip:Show()
+    end)
+    honorDuring:SetScript("OnLeave", function(self)
+        GameTooltip:Hide()
+    end)
+    return honorDuring
 end
 
 local function CreatePastTimer(frame)
@@ -102,7 +102,7 @@ local function CreateTitle(frame)
         frameParent= frame,
         font= "GameFontNormal",
         point= { xf= "TOP", yf= "TOP", x= 0, y= -10 },
-        text= "AV - Boss"
+        text= "Alterac Valley"
     })
 end
 
@@ -193,7 +193,6 @@ av.CreateBossBox = function()
 
     bossBoxFrame.title = CreateTitle(bossBoxFrame)
     bossBoxFrame.honorDuringGame = CreateHonorDuringGame(bossBoxFrame)
-    bossBoxFrame.honorPerHour = CreateHonorPerHour(bossBoxFrame)
     bossBoxFrame.timer = CreatePastTimer(bossBoxFrame)
     bossBoxFrame.closeButton = CreateCloseButton(bossBoxFrame)
     bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)

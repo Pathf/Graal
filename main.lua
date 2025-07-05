@@ -1,9 +1,9 @@
--- En cours de dev :
--- - Cimetiere lieux d'interet → cimetiere des neiges non detecté
--- - plus petit
+-- # TODO :
+-- Cimetiere lieux d'interet → cimetiere des neiges non detecté
+-- plus petit faire en sorte que quand arrivé à 0% les barres disparaise
+-- faire une barre qui decremente pour les timers
+-- customisation
 
--- TODO :
--- - customisation
 
 local ResetData = GRAAL.Data.ResetData
 local POIIcon = GRAAL.Data.POIIcon
