@@ -1,7 +1,15 @@
 local utils = GRAAL.Utils
+local SAVED = GRAAL.Data.saved
 ---
 
 utils.Get = function(variable) return _G[variable] end
+
+utils.GetElementInTalbe = function(property, value, table)
+    for _, elements in ipairs(table) do
+        if elements[property] == value then return element end
+    end
+    return nil
+end
 
 utils.TableSize = function(T)
   local count = 0
@@ -22,7 +30,7 @@ utils.Logger = function(...)
     end
     print(message) 
 end
---Logger = utils.Logger
+if ENV and ENV == "local" then Logger = utils.Logger end
 
 utils.GetIcon = function(nameIcon, format, size)
     size = size or {w=16,h=16,x=0,y=0}
@@ -54,3 +62,8 @@ utils.BuildTime =  function(milliseconds)
 end
 
 utils.timeSession = function() return math.floor((GetTime() - GRAAL.Data.timeSinceCreatePlayer)*1000) end -- since refresh or connection
+
+utils.ResetData = function()
+  SAVED = {}
+  AVBossTrackerSaved = {}
+end

@@ -19,7 +19,7 @@ av.CreateAvBossMinimapButton = function(frame)
         if button == "LeftButton" then 
             if frame and frame:IsShown() then frame:Hide() else frame:Show() end 
         elseif button == "RightButton" then
-            GRAAL.Data.ResetData()
+            GRAAL.Utils.ResetData()
             GRAAL.BG.Utils.Reset()
             ReloadUI() 
         end 

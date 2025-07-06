@@ -181,6 +181,8 @@ local function CreatePositionInformations()
     return positionInformations
 end
 
+av.GetBgBox = function() return Get("BossBoxFrame") end
+
 av.CreateBossBox = function()
     local numberBoss = TableSize(UNITS)
     local heightFrame = (numberBoss * 20) + 32 + 120

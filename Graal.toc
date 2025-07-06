@@ -19,5 +19,13 @@ BG/AV/minimap.lua
 BG/AV/bossFrame.lua
 BG/AV/boxBossFrame.lua
 
-event.lua
+events/player_logout.lua
+events/update_battlefield_status.lua
+events/chat_msg_combat_honor_gain.lua
+events/chat_msg_monster_yell.lua
+events/chat_msg_bg_system_alliance.lua
+events/chat_msg_bg_system_horde.lua
+events/player_entering_world.lua
+events.lua
+
 main.lua

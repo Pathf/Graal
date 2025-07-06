@@ -3,6 +3,7 @@ local Ternary = GRAAL.Utils.Ternary
 local honor = GRAAL.Data.honor
 local Get = GRAAL.Utils.Get
 ---
+
 utils.GetCurrentTimeInBG =  function()
     local milliseconds = GetBattlefieldInstanceRunTime()
     if milliseconds == 0 then return { minutes= 0, seconds= 0 } end

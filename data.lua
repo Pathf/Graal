@@ -141,8 +141,3 @@ data.LOCATIONS = {
         { id="r7", name="hutte de guérison Frostwolf", color=data.COLORS.RED, subname="Hutte de guérison", poiicon=data.POIICON.GRAVEYARD_BLUE_INFORCE}
     }
 }
-
-data.ResetData = function()
-  data.saved = {}
-  AVBossTrackerSaved = {}
-end
