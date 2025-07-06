@@ -9,11 +9,11 @@ local GetBgBox = GRAAL.BG.AV.GetBgBox
 ---
 
 local function ResetBGBox()
-    for index, unitInfo in ipairs(units) do
-        local frame = Get(unitInfo.name.."HealthFrame")
+    for _, unitInfo in ipairs(units) do
+        local frame = Get(unitInfo.name .. "HealthFrame")
         frame.healthBar:SetMinMaxValues(0, 100)
         frame.healthBar:SetValue(100)
-        frame.text:SetText(GetIcon(ICONS.INTEROGATION, 'text').." -> " .. unitInfo.subname)
+        frame.text:SetText(GetIcon(ICONS.INTEROGATION, 'text') .. " -> " .. unitInfo.subname)
     end
     local box = GetBgBox()
     box.positionInformations.removeAll()
@@ -23,12 +23,15 @@ end
 local eventName = "UPDATE_BATTLEFIELD_STATUS"
 local function eventAction()
     for i = 1, GetMaxBattlefieldID() do
-        local status, mapName, instanceID = GetBattlefieldStatus(i)
-        if status == "none" then ResetBGBox()  -- Battleground fini / plus de file d'attente
-        elseif status == "active" then SetBgGame(instanceID) -- Battleground en cours
-        elseif status == "confirm" then SetHonorGame() -- Invité à rejoindre la bataille
+        local status, _, instanceID = GetBattlefieldStatus(i)
+        if status == "none" then        -- Battleground fini / plus de file d'attente
+            ResetBGBox()
+        elseif status == "active" then  -- Battleground en cours
+            SetBgGame(instanceID)
+        elseif status == "confirm" then -- Invité à rejoindre la bataille
+            SetHonorGame()
         end
     end
 end
 
-table.insert(REGISTERS, { name=eventName, action=eventAction })
+table.insert(REGISTERS, { name = eventName, action = eventAction })

@@ -2,7 +2,8 @@
 GRAAL = {}
 GRAAL.Data = {}
 GRAAL.Utils = {}
-GRAAL.Event = { registers={} }
+GRAAL.Menu = {}
+GRAAL.Event = { registers = {} }
 
 -- UI
 GRAAL.Ui = {}

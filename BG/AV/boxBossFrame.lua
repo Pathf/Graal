@@ -54,25 +54,25 @@ local function CreateLockButton(frame, frameState)
     end
     local lockButton = CreateButton({
         template = "UIPanelButtonTemplate",
-        name= "AvBossLockButton",
-        frameParent= frame,
-        size= { w= 18, h= 18 },
-        point= { xf= "TOPLEFT", yf= "TOPLEFT", x= 8.5, y= -6 },
-        script= { onClick=onClick}
+        name = "AvBossLockButton",
+        frameParent = frame,
+        size = { w = 18, h = 18 },
+        point = { xf = "TOPLEFT", yf = "TOPLEFT", x = 8.5, y = -6 },
+        script = { onClick = onClick }
     })
     SetMovableState(frame, not frameState.locked, frameState)
-    lockButton:SetNormalTexture(Ternary(locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
+    lockButton:SetNormalTexture(Ternary(frameState.locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
     return lockButton
 end
 
 local function CreateHonorDuringGame(frame)
     local honorDuring = CreateText({
-        frameParent= frame,
-        font= "GameFontHighlight",
-        point= { xf= "BOTTOMLEFT", yf= "BOTTOMLEFT", x= 15, y= 15 },
-        color=COLORS.YELLOW_TITLE,
-        text="Honor: " .. honor.duringGame,
-        hide=false
+        frameParent = frame,
+        font = "GameFontHighlight",
+        point = { xf = "BOTTOMLEFT", yf = "BOTTOMLEFT", x = 15, y = 15 },
+        color = COLORS.YELLOW_TITLE,
+        text = "Honor: " .. honor.duringGame,
+        hide = false
     })
     honorDuring:SetScript("OnEnter", function(self)
         local timeSinceStartSession = GRAAL.Utils.BuildTime(GRAAL.Utils.timeSession())
@@ -93,25 +93,25 @@ end
 
 local function CreatePastTimer(frame)
     return CreateText({
-        frameParent= frame,
-        font= "GameFontHighlight",
-        point= { xf= "BOTTOMRIGHT", yf= "BOTTOMRIGHT", x= -15, y= 15 },
-        color=COLORS.YELLOW_TITLE,
-        hide=false
+        frameParent = frame,
+        font = "GameFontHighlight",
+        point = { xf = "BOTTOMRIGHT", yf = "BOTTOMRIGHT", x = -15, y = 15 },
+        color = COLORS.YELLOW_TITLE,
+        hide = false
     })
 end
 
 local function CreateTitle(frame)
     return CreateText({
-        frameParent= frame,
-        font= "GameFontNormal",
-        point= { xf= "TOP", yf= "TOP", x= 0, y= -10 },
-        text= "Alterac Valley"
+        frameParent = frame,
+        font = "GameFontNormal",
+        point = { xf = "TOP", yf = "TOP", x = 0, y = -10 },
+        text = "Alterac Valley"
     })
 end
 
 local function CheckRaiderView(boss, unitInfo)
-    local bossName, bossSubName, frame = unitInfo.name, unitInfo.subname, unitInfo.frame
+    local bossSubName, frame = unitInfo.subname, unitInfo.frame
     local hp, maxHp, percentage = UnitHealth(boss), UnitHealthMax(boss), 100
     if maxHp and maxHp > 0 then percentage = hp / maxHp * 100 end
     frame.healthBar:SetMinMaxValues(0, maxHp)
@@ -133,7 +133,7 @@ local function UpdateBossHealth(unitInfo)
 end
 
 local function CreatePositionInformations()
-    local positionInformations = { x=45, yMinInBox=-250, current={}, length=0 }
+    local positionInformations = { x = 45, yMinInBox = -250, current = {}, length = 0 }
     positionInformations.nextPosition = function()
         return {
             x = positionInformations.x,
@@ -141,8 +141,8 @@ local function CreatePositionInformations()
         }
     end
     positionInformations.add = function(timerOrBoss)
-        table.insert(positionInformations.current, { box=timerOrBoss, name=timerOrBoss.name })
-        positionInformations.length = positionInformations.length + 1 
+        table.insert(positionInformations.current, { box = timerOrBoss, name = timerOrBoss.name })
+        positionInformations.length = positionInformations.length + 1
     end
     positionInformations.remove = function(id, frameParent)
         local oldIndex
@@ -156,14 +156,14 @@ local function CreatePositionInformations()
         end
         for index, element in ipairs(positionInformations.current) do
             if oldIndex == index then
-                local y = positionInformations.yMinInBox + (-14 * (oldIndex-1))
+                local y = positionInformations.yMinInBox + (-14 * (oldIndex - 1))
                 oldIndex = oldIndex + 1
                 local boxTmp = element.box
                 boxTmp:ClearAllPoints()
-                boxTmp:SetPoint("TOPLEFT", frameParent, "TOPLEFT", positionInformations.x, y) 
+                boxTmp:SetPoint("TOPLEFT", frameParent, "TOPLEFT", positionInformations.x, y)
             end
         end
-        positionInformations.length = positionInformations.length - 1 
+        positionInformations.length = positionInformations.length - 1
     end
     positionInformations.exist = function(name)
         for index, element in ipairs(positionInformations.current) do
@@ -186,7 +186,8 @@ av.GetBgBox = function() return Get("BossBoxFrame") end
 av.CreateBossBox = function()
     local numberBoss = TableSize(UNITS)
     local heightFrame = (numberBoss * 20) + 32 + 120
-    local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"], { x = -10, y = -10, locked = false })
+    local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"],
+        { x = -10, y = -10, locked = false })
     dataSaved["bossBoxPosition"] = bossBoxPosition
 
     local bossBoxFrame = CreateFrame("Frame", "BossBoxFrame", UIParent, "UIPanelDialogTemplate")
@@ -203,18 +204,17 @@ av.CreateBossBox = function()
     bossBoxFrame.closeButton = CreateCloseButton(bossBoxFrame)
     bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)
     bossBoxFrame.positionInformations = CreatePositionInformations()
-    
+
     GRAAL.BG.AV.CreateAllBossFrame(bossBoxFrame)
-    GRAAL.BG.AV.CreateAvBossMinimapButton(bossBoxFrame)
 
     bossBoxFrame:SetScript("OnUpdate", function(self, delta)
         elapsed = elapsed + delta
         if elapsed >= 0.5 then
-            for _,unitInfo in ipairs(UNITS) do 
+            for _, unitInfo in ipairs(UNITS) do
                 UpdateBossHealth(unitInfo)
             end
             bossBoxFrame.timer:SetText(GetTimeInBGString())
-            
+
             elapsed = 0
         end
     end)

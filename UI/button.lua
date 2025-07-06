@@ -1,41 +1,45 @@
 -- CONFIG BUTTON
-local functionExample = function() print("test") end
-local configButtonExample = {
-    frameParent= UIParent, -- *
-    point= { xf= "CENTER", yf= "TOP", x= 0, y= 0 }, -- *
-    name= "ExampleButton",
-    template= "UIPanelButtonTemplate",
-    size= { w= 80, h= 20 },
-    movable=true,
-    text="ExampleText",
-    icon= {name= "achievement_pvp_a_01", minimap=true },
-    script= { 
-        onDragStart=functionExample, 
-        stop=functionExample, 
-        onClick=functionExample,
-        onEnter=functionExample,
-        onLeave=functionExample
-    },
-    hide=false
-}
---
+--local functionExample = function() print("test") end
+--local configButtonExample = {
+--    frameParent = UIParent,                         -- *
+--    point = { xf = "CENTER", yf = "TOP", x = 0, y = 0 }, -- *
+--    name = "ExampleButton",
+--    template = "UIPanelButtonTemplate",
+--    size = { w = 80, h = 20 },
+--    movable = true,
+--    text = "ExampleText",
+--    icon = { name = "achievement_pvp_a_01", minimap = true },
+--    script = {
+--        onDragStart = functionExample,
+--        stop = functionExample,
+--        onClick = functionExample,
+--        onEnter = functionExample,
+--        onLeave = functionExample
+--    },
+--    hide = false
+--}
 
 local function CreateFrameForButton(name, frameParent, template)
-    if template then return CreateFrame("Button", name, frameParent, template) else return CreateFrame("Button", name, frameParent) end
+    if template then
+        return CreateFrame("Button", name, frameParent, template)
+    else
+        return CreateFrame("Button", name,
+            frameParent)
+    end
 end
 
 local function ConfSize(button, size)
-    size = size or { w=80, h=20 }
+    size = size or { w = 80, h = 20 }
     button:SetSize(size.w, size.h)
 end
 
 local function ConfPoint(button, frameParent, point)
-    point = point or { xf="CENTER", yf="CENTER", x=0, y=0 }
+    point = point or { xf = "CENTER", yf = "CENTER", x = 0, y = 0 }
     button:SetPoint(point.xf, frameParent, point.yf, point.x, point.y)
 end
 
 local function ConfMovable(button, movable)
-    if movable then 
+    if movable then
         button:SetMovable(true)
         button:SetClampedToScreen(true)
         button:EnableMouse(true)
@@ -56,9 +60,9 @@ end
 
 local function ConfigIcon(button, icon)
     button.icon = button:CreateTexture(nil, "ARTWORK")
-    button.icon:SetTexture("Interface\\Icons\\"..icon.name)
+    button.icon:SetTexture("Interface\\Icons\\" .. icon.name)
     button.icon:SetAllPoints(button)
-    if icon.minimap then 
+    if icon.minimap then
         button.icon.mask = button:CreateMaskTexture()
         button.icon.mask:SetTexture("Interface\\CharacterFrame\\TempPortraitAlphaMask")
         button.icon.mask:SetAllPoints(button)

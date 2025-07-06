@@ -1,0 +1,17 @@
+{
+    "Lua.diagnostics.globals": [
+        "GameTooltip",
+        "CreateFrame",
+        "ReloadUI",
+        "Minimap",
+        "GetTime",
+        "UIParent",
+        "UnitHealth",
+        "UnitHealthMax",
+        "UnitExists",
+        "UnitName",
+        "GetBattlefieldInstanceRunTime",
+        "GetMaxBattlefieldID",
+        "GetBattlefieldStatus",
+    ]
+}

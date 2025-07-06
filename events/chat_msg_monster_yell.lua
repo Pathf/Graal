@@ -22,12 +22,19 @@ local function Who(message)
     return nil
 end
 
-local function IsAttackingLocation(message) 
-    return string.match(message, "Le (.+) est attaqu") or string.match(message, "La (.+) est attaqu") or string.match(message, "a pris le (.+) ! Si") -- dernier = cas du cimitiere des neiges
+local function IsAttackingLocation(message)
+    return string.match(message, "Le (.+) est attaqu") or string.match(message, "La (.+) est attaqu") or
+        string.match(message, "a pris le (.+) ! Si") -- dernier = cas du cimitiere des neiges
 end
 local function IsSavedLocation(message) return string.match(message, "Le (.+) est sauvé") end
-local function IsCapturedLocation(message) return string.match(message, "Le (.+) a été pris") or string.match(message, "La (.+) a été prise") end
-local function IsDestroyedLocation(message) return string.match(message, "La (.+) a été détruite") or string.match(message, "Le (.+) a été détrui") end
+local function IsCapturedLocation(message)
+    return string.match(message, "Le (.+) a été pris") or
+        string.match(message, "La (.+) a été prise")
+end
+local function IsDestroyedLocation(message)
+    return string.match(message, "La (.+) a été détruite") or
+        string.match(message, "Le (.+) a été détrui")
+end
 
 local function ParseHeraldMessage(message)
     local location, action
@@ -58,27 +65,32 @@ local function ChatHeraldAction(message)
     local location, action, who = ParseHeraldMessage(message)
     if location and action and who then
         local bgBox = GetBgBox()
-        for index, avLocation in ipairs(LOCATIONS.AV) do 
+        for _, avLocation in ipairs(LOCATIONS.AV) do
             local match = string.match(location, EscapePattern(avLocation.name))
             if match then
                 if isAttacked(action, avLocation) then
                     local position = bgBox.positionInformations.nextPosition()
                     local icon = avLocation.poiicon
                     if avLocation.id == "w1" then
-                        if who == HORDE then icon = POIICON.GRAVEYARD_RED_INFORCE else icon = POIICON.GRAVEYARD_BLUE_INFORCE end
+                        if who == HORDE then
+                            icon = POIICON.GRAVEYARD_RED_INFORCE
+                        else
+                            icon = POIICON
+                                .GRAVEYARD_BLUE_INFORCE
+                        end
                     end
                     bgBox.positionInformations.add(
-                        CreateTimer({ 
-                            text=avLocation.subname, 
-                            point={ xf="TOPLEFT", yf="TOPLEFT", x=position.x, y=position.y }, 
-                            icon=icon, 
-                            isPoi=true, 
-                            name=avLocation.name,
-                            id=avLocation.id,
-                            frameParent=bgBox
+                        CreateTimer({
+                            text = avLocation.subname,
+                            point = { xf = "TOPLEFT", yf = "TOPLEFT", x = position.x, y = position.y },
+                            icon = icon,
+                            isPoi = true,
+                            name = avLocation.name,
+                            id = avLocation.id,
+                            frameParent = bgBox
                         })
                     )
-                elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then 
+                elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then
                     bgBox.positionInformations.remove(avLocation.id, bgBox)
                 end
             end
@@ -89,4 +101,4 @@ end
 local eventName = "CHAT_MSG_MONSTER_YELL"
 local eventAction = function(message) ChatHeraldAction(message) end
 
-table.insert(REGISTERS, { name=eventName, action=eventAction })
+table.insert(REGISTERS, { name = eventName, action = eventAction })

@@ -15,7 +15,6 @@ UI/text.lua
 UI/timer.lua
 
 BG/utils.lua
-BG/AV/minimap.lua
 BG/AV/bossFrame.lua
 BG/AV/boxBossFrame.lua
 
@@ -28,4 +27,5 @@ events/chat_msg_bg_system_horde.lua
 events/player_entering_world.lua
 events.lua
 
+menu.lua
 main.lua
