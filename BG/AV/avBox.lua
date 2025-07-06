@@ -1,6 +1,7 @@
 local av = GRAAL.BG.AV
 
-local honor = GRAAL.Data.honor
+local CreateHonorDuringGame = GRAAL.BG.AV.CreateHonorDuringGame
+
 local elapsed = GRAAL.Data.elapsed
 local UNITS = GRAAL.Data.UNITS
 local COLORS = GRAAL.Data.COLORS
@@ -65,32 +66,6 @@ local function CreateLockButton(frame, frameState)
     return lockButton
 end
 
-local function CreateHonorDuringGame(frame)
-    local honorDuring = CreateText({
-        frameParent = frame,
-        font = "GameFontHighlight",
-        point = { xf = "BOTTOMLEFT", yf = "BOTTOMLEFT", x = 15, y = 15 },
-        color = COLORS.YELLOW_TITLE,
-        text = "Honor: " .. honor.duringGame,
-        hide = false
-    })
-    honorDuring:SetScript("OnEnter", function(self)
-        local timeSinceStartSession = GRAAL.Utils.BuildTime(GRAAL.Utils.timeSession())
-        local honorPerHour = honor.session / Ternary(timeSinceStartSession.hours > 1, timeSinceStartSession.hours, 1)
-        local honorWeek = Get("HonorFrameThisWeekContributionValue"):GetText()
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Honor stats", 1, 1, 1)
-        GameTooltip:AddLine("Honor week: " .. honorWeek, 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Honor/h: " .. honorPerHour, 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Time since refresh: " .. timeSinceStartSession.inText(), 0.8, 0.8, 0.8)
-        GameTooltip:Show()
-    end)
-    honorDuring:SetScript("OnLeave", function(self)
-        GameTooltip:Hide()
-    end)
-    return honorDuring
-end
-
 local function CreatePastTimer(frame)
     return CreateText({
         frameParent = frame,
@@ -122,7 +97,7 @@ local function CheckRaiderView(boss, unitInfo)
 end
 
 local function UpdateBossHealth(unitInfo)
-    local hasRaiderView, hasBossAgro = false, false
+    local hasRaiderView = false
     for i = 1, 40 do
         local boss = "raid" .. i .. "target"
         if UnitExists(boss) and UnitName(boss) == unitInfo.name then
@@ -166,13 +141,13 @@ local function CreatePositionInformations()
         positionInformations.length = positionInformations.length - 1
     end
     positionInformations.exist = function(name)
-        for index, element in ipairs(positionInformations.current) do
+        for _, element in ipairs(positionInformations.current) do
             if element.name == name then return true end
         end
         return false
     end
     positionInformations.removeAll = function()
-        for index, element in ipairs(positionInformations.current) do
+        for _, element in ipairs(positionInformations.current) do
             element.box:Hide()
         end
         positionInformations.current = {}
@@ -183,7 +158,7 @@ end
 
 av.GetBgBox = function() return Get("BossBoxFrame") end
 
-av.CreateBossBox = function()
+av.CreateAvBox = function()
     local numberBoss = TableSize(UNITS)
     local heightFrame = (numberBoss * 20) + 32 + 120
     local bossBoxPosition = Ternary(dataSaved["bossBoxPosition"], dataSaved["bossBoxPosition"],
@@ -205,7 +180,7 @@ av.CreateBossBox = function()
     bossBoxFrame.lockButton = CreateLockButton(bossBoxFrame, bossBoxPosition)
     bossBoxFrame.positionInformations = CreatePositionInformations()
 
-    GRAAL.BG.AV.CreateAllBossFrame(bossBoxFrame)
+    GRAAL.BG.AV.CreateAllBossBar(bossBoxFrame)
 
     bossBoxFrame:SetScript("OnUpdate", function(self, delta)
         elapsed = elapsed + delta

@@ -129,7 +129,7 @@ data.LOCATIONS = {
         { id = "b3", name = "fortin sud de Dun Baldar",    color = data.COLORS.BLUE,  subname = "F. Sud",            poiicon = data.POIICON.TOWER_RED_INFORCE },
         { id = "b4", name = "cimetière Stormpike",         color = data.COLORS.BLUE,  subname = "C. Stormpike",      poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
         { id = "b5", name = "fortin de l'Aile de glace",   color = data.COLORS.BLUE,  subname = "F. Aile de glace",  poiicon = data.POIICON.TOWER_RED_INFORCE },
-        { id = "b6", name = "cimetière StoneHeart",        color = data.COLORS.BLUE,  subname = "C. StoneHeart",     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
+        { id = "b6", name = "cimetière de StoneHeart",     color = data.COLORS.BLUE,  subname = "C. StoneHeart",     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
         { id = "b7", name = "fortin de Stoneheart",        color = data.COLORS.BLUE,  subname = "F. StoneHeart",     poiicon = data.POIICON.TOWER_RED_INFORCE },
         { id = "w1", name = "cimetière des neiges",        color = data.COLORS.WHITE, subname = "C. Neiges",         poiicon = data.POIICON.GRAVEYARD },
         { id = "r1", name = "cimetière de Glace-sang",     color = data.COLORS.RED,   subname = "C. Glace-sang",     poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },

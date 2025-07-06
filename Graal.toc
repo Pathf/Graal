@@ -15,8 +15,9 @@ UI/text.lua
 UI/timer.lua
 
 BG/utils.lua
-BG/AV/bossFrame.lua
-BG/AV/boxBossFrame.lua
+BG/AV/bossBar.lua
+BG/AV/honorDuringGameText.lua
+BG/AV/avBox.lua
 
 events/player_logout.lua
 events/update_battlefield_status.lua

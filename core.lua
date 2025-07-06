@@ -1,3 +1,5 @@
+VERSION = GetAddOnMetadata('Graal', 'version')
+
 -- Commun
 GRAAL = {}
 GRAAL.Data = {}

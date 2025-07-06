@@ -32,39 +32,39 @@ local function CreateLabel(frame, subname)
     })
 end
 
-local function CreateBossFrame(index, frameParent)
+local function CreateBossBar(index, frameParent)
     frameParent = frameParent or UIParent
     local unitInfo = UNITS[index]
     local yFrame = -25 + ((index - 1) * -18)
     local name, subname, color = unitInfo.name, unitInfo.subname, unitInfo.color
 
-    local frame = CreateFrame("Frame", name .. "HealthFrame", frameParent)
-    frame:SetSize(162, 18)
-    frame:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
-    frame:SetClampedToScreen(true)
-    frame:SetFrameStrata("MEDIUM")
-    frame:SetFrameLevel(5)
+    local bossBar = CreateFrame("Frame", name .. "HealthFrame", frameParent)
+    bossBar:SetSize(162, 18)
+    bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
+    bossBar:SetClampedToScreen(true)
+    bossBar:SetFrameStrata("MEDIUM")
+    bossBar:SetFrameLevel(5)
 
-    frame.healthBar = CreateHealthBar(frame, color)
+    bossBar.healthBar = CreateHealthBar(bossBar, color)
 
-    frame.textFrame = CreateFrame("Frame", nil, frame)
-    frame.textFrame:SetAllPoints()
-    frame.textFrame:SetFrameStrata("MEDIUM")
-    frame.textFrame:SetFrameLevel(6)
+    bossBar.textFrame = CreateFrame("Frame", nil, bossBar)
+    bossBar.textFrame:SetAllPoints()
+    bossBar.textFrame:SetFrameStrata("MEDIUM")
+    bossBar.textFrame:SetFrameLevel(6)
 
-    frame.iconEye = frame.textFrame:CreateTexture(nil, "ARTWORK")
-    frame.iconEye:SetSize(15, 15)
-    frame.iconEye:SetPoint("LEFT", frame, "LEFT", 0, 0)
-    frame.iconEye:SetTexture("Interface\\Icons\\Ability_Ambush")
-    frame.iconEye:Hide()
+    bossBar.iconEye = bossBar.textFrame:CreateTexture(nil, "ARTWORK")
+    bossBar.iconEye:SetSize(15, 15)
+    bossBar.iconEye:SetPoint("LEFT", bossBar, "LEFT", 0, 0)
+    bossBar.iconEye:SetTexture("Interface\\Icons\\Ability_Ambush")
+    bossBar.iconEye:Hide()
 
-    frame.text = CreateLabel(frame.textFrame, subname)
+    bossBar.text = CreateLabel(bossBar.textFrame, subname)
 
-    UNITS[index].frame = frame
+    UNITS[index].frame = bossBar
 end
 
-av.CreateAllBossFrame = function(frameParent)
+av.CreateAllBossBar = function(frameParent)
     for index, _ in ipairs(UNITS) do
-        CreateBossFrame(index, frameParent)
+        CreateBossBar(index, frameParent)
     end
 end

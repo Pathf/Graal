@@ -8,7 +8,7 @@ local GetBgBox = GRAAL.BG.AV.GetBgBox
 Menu.CreateMinimapButton = function()
     local onEnter = function(self)
         GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-        GameTooltip:AddLine("Graal")
+        GameTooltip:AddLine("Graal AV (v" .. VERSION .. ")")
         GameTooltip:AddLine("Clic gauche: Ouvrir/Fermer")
         GameTooltip:AddLine("Clic droit: Reset")
         GameTooltip:Show()
