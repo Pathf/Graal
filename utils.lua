@@ -13,6 +13,7 @@ utils.Ternary = function(condition, trueResult, falseResult)
     if condition then return trueResult end
     return falseResult
 end
+local Ternary = utils.Ternary
 
 utils.Logger = function(...)
     local message = "<Graal> "
@@ -41,8 +42,15 @@ end
 utils.BuildTime =  function(milliseconds)
     if milliseconds == 0 then return { minutes= 0, seconds= 0 } end
     local totalSeconds = math.floor(milliseconds / 1000)
+    local hours = math.floor(totalSeconds / 3600)
+    local minutes = math.floor((totalSeconds % 3600) / 60)
     local seconds = totalSeconds % 60
-    local minutes = math.floor(totalSeconds / 60)
-    local hours = math.floor(minutes/60)
-    return { hours=hours, minutes=minutes, seconds=seconds }
+    return {
+        hours=hours, 
+        minutes=minutes, 
+        seconds=seconds, 
+        inText=function() return Ternary(hours > 9,hours, "0"..hours) ..":".. Ternary(minutes > 9,minutes, "0"..minutes) ..":".. Ternary(seconds > 9,seconds, "0"..seconds) end
+    }
 end
+
+utils.timeSession = function() return math.floor((GetTime() - GRAAL.Data.timeSinceCreatePlayer)*1000) end -- since refresh or connection

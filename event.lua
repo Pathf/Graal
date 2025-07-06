@@ -118,6 +118,9 @@ local function ChatHeraldAction(message)
     end
 end
 
+local playerConnectionOrReset = "PLAYER_ENTERING_WORLD"
+local function PlayerConnectionOrResetAction() GRAAL.Utils.timeSinceCreatePlayer = GetTime() end
+
 event.ListenEvent = function()
     local eventFrame = CreateFrame("Frame")
     eventFrame:RegisterEvent(logoutEvent)
@@ -127,12 +130,15 @@ event.ListenEvent = function()
     -- eventFrame:RegisterEvent("CHAT_MSG_BG_SYSTEM_NEUTRAL") -- début de game
     eventFrame:RegisterEvent(chatBgSystemAlly)
     eventFrame:RegisterEvent(chatBgSystemHorde)
+    eventFrame:RegisterEvent(playerConnectionOrReset)
 
     eventFrame:SetScript("OnEvent", function(self, event, message)
         if event == logoutEvent then LogoutAction()
         elseif event == bgStatusEvent then BgStatusAction()
         elseif event == chatHonorEvent then ChatHonorAction(message)
         elseif event == chatHerald then ChatHeraldAction(message)
-        elseif (event == chatBgSystemAlly or event == chatBgSystemHorde) and string.match(message, LOCATIONS.AV[8].name) then ChatHeraldAction(message) end
+        elseif (event == chatBgSystemAlly or event == chatBgSystemHorde) and string.match(message, LOCATIONS.AV[8].name) then ChatHeraldAction(message) 
+        elseif event == playerConnectionOrReset then PlayerConnectionOrResetAction()
+        end
     end)
 end
