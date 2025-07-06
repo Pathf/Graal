@@ -136,8 +136,8 @@ data.LOCATIONS = {
         { id = "r2", name = "tour de Glace-sang",          color = data.COLORS.RED,   subname = "T. Glace-sang",     poiicon = data.POIICON.TOWER_BLUE_INFORCE },
         { id = "r3", name = "tour de la halte",            color = data.COLORS.RED,   subname = "T. Halte",          poiicon = data.POIICON.TOWER_BLUE_INFORCE },
         { id = "r4", name = "cimetière Frostwolf",         color = data.COLORS.RED,   subname = "C. Frostwolf",      poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
-        { id = "r5", name = "tour Frostwolf occidentale",  color = data.COLORS.RED,   subname = "T. Occidentale",    poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
-        { id = "r6", name = "tour Frostwolf orientale",    color = data.COLORS.RED,   subname = "T. Orientale",      poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
+        { id = "r5", name = "tour Frostwolf occidentale",  color = data.COLORS.RED,   subname = "T. Occidentale",    poiicon = data.POIICON.TOWER_BLUE_INFORCE },
+        { id = "r6", name = "tour Frostwolf orientale",    color = data.COLORS.RED,   subname = "T. Orientale",      poiicon = data.POIICON.TOWER_BLUE_INFORCE },
         { id = "r7", name = "hutte de guérison Frostwolf", color = data.COLORS.RED,   subname = "Hutte de guérison", poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE }
     }
 }
