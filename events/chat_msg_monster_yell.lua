@@ -1,11 +1,12 @@
-local Get = GRAAL.Utils.Get
 local LOCATIONS = GRAAL.Data.LOCATIONS
 local EscapePattern = GRAAL.Utils.EscapePattern
 local POIICON = GRAAL.Data.POIICON
 local CreateTimer = GRAAL.Ui.CreateTimer
 local REGISTERS = GRAAL.Event.registers
 local GetBgBox = GRAAL.BG.AV.GetBgBox
+local Get = GRAAL.Utils.Get
 ---
+
 local ALLY = "Alliance"
 local HORDE = "Horde"
 local ATTACKING = "attaqué"
@@ -37,7 +38,7 @@ local function IsDestroyedLocation(message)
 end
 
 local function ParseHeraldMessage(message)
-    local location, action
+    local location
     local who = Who(message)
 
     location = IsAttackingLocation(message)
@@ -56,7 +57,10 @@ local function ParseHeraldMessage(message)
 end
 
 local function isExist(id) return GetBgBox().positionInformations.exist(id) end
-local function isAttacked(action, avLocation) return action == ATTACKING and not isExist(avLocation.id) end
+local function isAttacked(action, avLocation)
+    return action == ATTACKING and
+        (not isExist(avLocation.id) or avLocation.id == "w1")
+end
 local function isSaved(action, avLocation) return action == SAVED and isExist(avLocation.id) end
 local function isCaptured(action, avLocation) return action == CAPTURED and isExist(avLocation.id) end
 local function isDestroyed(action, avLocation) return action == DESTOYED and isExist(avLocation.id) end
@@ -75,21 +79,25 @@ local function ChatHeraldAction(message)
                         if who == HORDE then
                             icon = POIICON.GRAVEYARD_RED_INFORCE
                         else
-                            icon = POIICON
-                                .GRAVEYARD_BLUE_INFORCE
+                            icon = POIICON.GRAVEYARD_BLUE_INFORCE
                         end
                     end
-                    bgBox.positionInformations.add(
-                        CreateTimer({
-                            text = avLocation.subname,
-                            point = { xf = "TOPLEFT", yf = "TOPLEFT", x = position.x, y = position.y },
-                            icon = icon,
-                            isPoi = true,
-                            name = avLocation.name,
-                            id = avLocation.id,
-                            frameParent = bgBox
-                        })
-                    )
+
+                    if avLocation.id == "w1" and isExist(avLocation.id) then
+                        Get(avLocation.id .. "Timer").icon.texture:SetTexCoord(icon.l, icon.r, icon.t, icon.b)
+                    else
+                        bgBox.positionInformations.add(
+                            CreateTimer({
+                                text = avLocation.subname,
+                                point = { xf = "TOPLEFT", yf = "TOPLEFT", x = position.x, y = position.y },
+                                icon = icon,
+                                isPoi = true,
+                                name = avLocation.name,
+                                id = avLocation.id,
+                                frameParent = bgBox
+                            })
+                        )
+                    end
                 elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then
                     bgBox.positionInformations.remove(avLocation.id, bgBox)
                 end
