@@ -13,5 +13,6 @@
         "GetBattlefieldInstanceRunTime",
         "GetMaxBattlefieldID",
         "GetBattlefieldStatus",
+        "GetAddOnMetadata"
     ]
 }
