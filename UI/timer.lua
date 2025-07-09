@@ -1,4 +1,3 @@
--- CONFIG TIMER
 --local configTimerExample = {
 --    icon= GRAAL.Data.ICONS.HUMAN.M, -- or GRAAL.Data.POIIcon.MINE -- *
 --    id= "b1", -- *
@@ -20,27 +19,27 @@ GRAAL.Ui.CreateTimer = function(config)
     config.isPoi = config.isPoi or false
 
     local frame = CreateFrame("Frame", config.id .. "timer", config.frameParent)
-    frame:SetSize(1, 1)
+    frame:SetSize(config.size.w, config.size.h)
     frame:SetPoint(config.point.xf, config.frameParent, config.point.yf, config.point.x, config.point.y)
     frame.name = config.id
     frame.icon = GRAAL.Ui.CreateIcon({
         frameParent = frame,
         isPoi = config.isPoi,
-        point = { xf = "CENTER", yf = "CENTER", x = -30, y = 0 },
+        point = { xf = "LEFT", yf = "LEFT", x = 0, y = 0 },
         icon =
             config.icon,
-        size = { w = config.size.w, h = config.size.h }
+        size = { w = 15, h = 15 }
     })
     frame.cooldownText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
     frame.cooldownText:SetFont("Fonts\\FRIZQT__.TTF", 10)
-    frame.cooldownText:SetPoint("LEFT", frame, "LEFT", -20, 0)
+    frame.cooldownText:SetPoint("LEFT", frame, "LEFT", 15, 0)
 
     frame.runTimer = function()
         frame:Show()
         frame.duration = config.time
         frame.startTime = GetTime()
 
-        frame:SetScript("OnUpdate", function(self, elapsed)
+        frame:SetScript("OnUpdate", function(self)
             local remaining = frame.startTime + frame.duration - GetTime()
             if remaining > 0 then
                 local time = GRAAL.Utils.BuildTime(remaining * 1000)

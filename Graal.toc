@@ -17,6 +17,9 @@ UI/timer.lua
 BG/utils.lua
 BG/AV/bossBar.lua
 BG/AV/honorDuringGameText.lua
+BG/AV/lockButton.lua
+BG/AV/onUpdateService.lua
+BG/AV/positionInformations.lua
 BG/AV/avBox.lua
 
 events/player_logout.lua

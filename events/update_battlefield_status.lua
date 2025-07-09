@@ -17,6 +17,7 @@ local function ResetBGBox()
     end
     local box = GetBgBox()
     box.positionInformations.removeAll()
+    box.resetAllBossBar()
     box.title:SetText("AV - Boss")
 end
 

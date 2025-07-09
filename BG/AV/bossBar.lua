@@ -32,13 +32,27 @@ local function CreateLabel(frame, subname)
     })
 end
 
+--local configBossBarExample = {
+--  name= "ExampleBossBar",
+--  frameParent=UIParent,
+--  point= { xf= "TOPRIGHT", yf= "TOPRIGHT", x= 0, y= 0 },
+--  size= { w= 162, h= 18 }
+--  unitInfo= {
+--      name=,
+--      subname=,
+--      color=
+--  }
+--}
+
+
 local function CreateBossBar(index, frameParent)
     frameParent = frameParent or UIParent
     local unitInfo = UNITS[index]
     local yFrame = -25 + ((index - 1) * -18)
-    local name, subname, color = unitInfo.name, unitInfo.subname, unitInfo.color
+    local name, subname, color = unitInfo.name .. "HealthFrame", unitInfo.subname, unitInfo.color
 
-    local bossBar = CreateFrame("Frame", name .. "HealthFrame", frameParent)
+    local bossBar = CreateFrame("Frame", name, frameParent)
+    bossBar.name = name
     bossBar:SetSize(162, 18)
     bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
     bossBar:SetClampedToScreen(true)
@@ -59,7 +73,7 @@ local function CreateBossBar(index, frameParent)
     bossBar.iconEye:Hide()
 
     bossBar.text = CreateLabel(bossBar.textFrame, subname)
-
+    frameParent.positionInformations.add(bossBar)
     UNITS[index].frame = bossBar
 end
 

@@ -89,12 +89,13 @@ local function ChatHeraldAction(message)
                         bgBox.positionInformations.add(
                             CreateTimer({
                                 text = avLocation.subname,
-                                point = { xf = "TOPLEFT", yf = "TOPLEFT", x = position.x, y = position.y },
+                                point = { xf = "TOPRIGHT", yf = "TOPRIGHT", x = position.x, y = position.y },
                                 icon = icon,
                                 isPoi = true,
                                 name = avLocation.name,
                                 id = avLocation.id,
-                                frameParent = bgBox
+                                frameParent = bgBox,
+                                size = { w = 162, h = 18 }
                             })
                         )
                     end
