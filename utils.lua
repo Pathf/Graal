@@ -26,7 +26,7 @@ end
 local Ternary = utils.Ternary
 
 utils.Logger = function(...)
-    local message = "<Graal> "
+    local message = "<Graal AV> "
     for _, element in ipairs { ... } do
         message = message .. element
     end
