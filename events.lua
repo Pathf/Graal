@@ -8,7 +8,7 @@ EVENT.ListenEvent = function()
         eventFrame:RegisterEvent(registerEvent.name)
     end
 
-    eventFrame:SetScript("OnEvent", function(self, event, message)
+    eventFrame:SetScript("OnEvent", function(_, event, message)
         for _, registerEvent in ipairs(REGISTERS) do
             if event == registerEvent.name then registerEvent.action(message) end
         end

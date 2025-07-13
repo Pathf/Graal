@@ -10,18 +10,21 @@
 --}
 
 local Ternary = GRAAL.Utils.Ternary
+local BARTYPE = GRAAL.Data.BARTYPE
 --
+
 GRAAL.Ui.CreateTimer = function(config)
     config.frameParent = config.frameParent or UIParent
     config.time = config.time or 300
-    config.point = config.point or { xf = "CENTER", yf = "CENTER", x = 0, y = 0 }
-    config.size = config.size or { w = 15, h = 15 }
+    config.point = config.point or { xf = "TOPRIGHT", yf = "TOPRIGHT", x = 0, y = 0 }
+    config.size = config.size or { w = 162, h = 18 }
     config.isPoi = config.isPoi or false
 
     local frame = CreateFrame("Frame", config.id .. "timer", config.frameParent)
     frame:SetSize(config.size.w, config.size.h)
     frame:SetPoint(config.point.xf, config.frameParent, config.point.yf, config.point.x, config.point.y)
     frame.name = config.id
+    frame.type = BARTYPE.TIMER
     frame.icon = GRAAL.Ui.CreateIcon({
         frameParent = frame,
         isPoi = config.isPoi,
@@ -50,9 +53,8 @@ GRAAL.Ui.CreateTimer = function(config)
                 )
                 frame.cooldownText:SetText(config.text .. " - " .. text)
             else
-                frame.cooldownText:SetText("")
-                config.frameParent.positionInformations.remove(config.id, config.frameParent)
                 frame:Hide()
+                config.frameParent.RemoveBar(config.id)
                 self:SetScript("OnUpdate", nil)
             end
         end)

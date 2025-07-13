@@ -28,11 +28,11 @@ local function SetMovableState(frame, movable, position)
     end
 end
 
-AV.CreateLockButton = function(frame, frameState)
+AV.CreateLockButton = function(frame, locked, position)
     local onClick = function()
-        frameState.locked = not frameState.locked
-        SetMovableState(frame, not frameState.locked, frameState)
-        SetLockedState(frame, frameState.locked)
+        locked = not locked
+        SetMovableState(frame, not locked, position)
+        SetLockedState(frame, locked)
     end
     local lockButton = CreateButton({
         template = "UIPanelButtonTemplate",
@@ -42,7 +42,7 @@ AV.CreateLockButton = function(frame, frameState)
         point = { xf = "TOPLEFT", yf = "TOPLEFT", x = 8.5, y = -6 },
         script = { onClick = onClick }
     })
-    SetMovableState(frame, not frameState.locked, frameState)
-    lockButton:SetNormalTexture(Ternary(frameState.locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
+    SetMovableState(frame, not locked, position)
+    lockButton:SetNormalTexture(Ternary(locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))
     return lockButton
 end

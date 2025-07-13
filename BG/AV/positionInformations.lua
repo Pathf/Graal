@@ -10,12 +10,12 @@ local function nextPosition()
     }
 end
 
-local function add(bar)
+local function Add(bar)
     table.insert(positionInformations.current, { box = bar, name = bar.name })
     positionInformations.length = positionInformations.length + 1
 end
 
-local function remove(id, frameParent)
+local function Remove(id, frameParent)
     local oldIndex
     for index, element in ipairs(positionInformations.current) do
         if element.name == id then
@@ -37,14 +37,14 @@ local function remove(id, frameParent)
     end
 end
 
-local function exist(name)
+local function IsExist(name)
     for _, element in ipairs(positionInformations.current) do
         if element.name == name then return true end
     end
     return false
 end
 
-local function removeAll()
+local function RemoveAll()
     for _, element in ipairs(positionInformations.current) do
         element.box:Hide()
     end
@@ -59,10 +59,10 @@ end
 AV.CreatePositionInformations = function()
     positionInformations = { x = -8, yMinInBox = -7, current = {}, length = 1 }
     positionInformations.nextPosition = nextPosition
-    positionInformations.add = add
-    positionInformations.remove = remove
-    positionInformations.exist = exist
-    positionInformations.removeAll = removeAll
+    positionInformations.Add = Add
+    positionInformations.Remove = Remove
+    positionInformations.IsExist = IsExist
+    positionInformations.RemoveAll = RemoveAll
     positionInformations.isEmpty = isEmpty
     return positionInformations
 end

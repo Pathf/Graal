@@ -4,7 +4,11 @@ local data = GRAAL.Data
 data.elapsed = 0
 data.timeSinceCreatePlayer = GetTime()
 data.honor = { duringGame = 0, session = 0 }
-data.saved = AVBossTrackerSaved or {}
+
+data.BARTYPE = {
+    BOSS = "BossBar",
+    TIMER = "TimerBar",
+}
 
 data.COLORS = {
     RED = { r = 1, g = 0, b = 0 },

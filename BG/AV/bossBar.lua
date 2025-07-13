@@ -1,6 +1,7 @@
 local av = GRAAL.BG.AV
 
 local UNITS = GRAAL.Data.UNITS
+local BARTYPE = GRAAL.Data.BARTYPE
 local COLORS = GRAAL.Data.COLORS
 local TARGETINGFRAME = GRAAL.Data.TARGETINGFRAME
 local ICONS = GRAAL.Data.ICONS
@@ -49,10 +50,13 @@ local function CreateBossBar(index, frameParent)
     frameParent = frameParent or UIParent
     local unitInfo = UNITS[index]
     local yFrame = -25 + ((index - 1) * -18)
-    local name, subname, color = unitInfo.name .. "HealthFrame", unitInfo.subname, unitInfo.color
+    local name, subname, color, icon = unitInfo.name, unitInfo.subname, unitInfo.color, unitInfo.icon
 
-    local bossBar = CreateFrame("Frame", name, frameParent)
+    local bossBar = CreateFrame("Frame", name .. "HealthFrame", frameParent)
     bossBar.name = name
+    bossBar.subname = subname
+    bossBar.icon = icon
+    bossBar.type = BARTYPE.BOSS
     bossBar:SetSize(162, 18)
     bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
     bossBar:SetClampedToScreen(true)
@@ -73,12 +77,16 @@ local function CreateBossBar(index, frameParent)
     bossBar.iconEye:Hide()
 
     bossBar.text = CreateLabel(bossBar.textFrame, subname)
-    frameParent.positionInformations.add(bossBar)
     UNITS[index].frame = bossBar
+    return bossBar
 end
 
 av.CreateAllBossBar = function(frameParent)
+    local allBossBar = {}
     for index, _ in ipairs(UNITS) do
-        CreateBossBar(index, frameParent)
+        local bossBar = CreateBossBar(index, frameParent)
+        frameParent.AddBar(bossBar)
+        table.insert(allBossBar, bossBar)
     end
+    return allBossBar
 end

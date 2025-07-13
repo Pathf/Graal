@@ -1,5 +1,4 @@
 local utils = GRAAL.Utils
-local SAVED = GRAAL.Data.saved
 ---
 
 utils.Get = function(variable) return _G[variable] end
@@ -27,8 +26,13 @@ local Ternary = utils.Ternary
 
 utils.Logger = function(...)
     local message = "<Graal AV> "
-    for _, element in ipairs { ... } do
-        message = message .. element
+    for i = 1, select("#", ...) do
+        local element = select(i, ...)
+        if element == nil then
+            message = message .. tostring("null")
+        else
+            message = message .. tostring(element)
+        end
     end
     print(message)
 end
@@ -72,7 +76,6 @@ end
 
 utils.timeSession = function() return math.floor((GetTime() - GRAAL.Data.timeSinceCreatePlayer) * 1000) end -- since refresh or connection
 
-utils.ResetData = function()
-    SAVED = {}
-    AVBossTrackerSaved = {}
+utils.Reset = function()
+    GRAALSAVED = {}
 end

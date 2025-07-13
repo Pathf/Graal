@@ -1,9 +1,8 @@
 local LOCATIONS = GRAAL.Data.LOCATIONS
 local EscapePattern = GRAAL.Utils.EscapePattern
 local POIICON = GRAAL.Data.POIICON
-local CreateTimer = GRAAL.Ui.CreateTimer
 local REGISTERS = GRAAL.Event.registers
-local GetBgBox = GRAAL.BG.AV.GetBgBox
+local GetAvBox = GRAAL.BG.Utils.GetAvBox
 local Get = GRAAL.Utils.Get
 ---
 
@@ -56,7 +55,7 @@ local function ParseHeraldMessage(message)
     return nil, nil, who
 end
 
-local function isExist(id) return GetBgBox().positionInformations.exist(id) end
+local function isExist(id) return GetAvBox().isBarExist(id) end
 local function isAttacked(action, avLocation)
     return action == ATTACKING and
         (not isExist(avLocation.id) or avLocation.id == "w1")
@@ -68,12 +67,10 @@ local function isDestroyed(action, avLocation) return action == DESTOYED and isE
 local function ChatHeraldAction(message)
     local location, action, who = ParseHeraldMessage(message)
     if location and action and who then
-        local bgBox = GetBgBox()
         for _, avLocation in ipairs(LOCATIONS.AV) do
             local match = string.match(location, EscapePattern(avLocation.name))
             if match then
                 if isAttacked(action, avLocation) then
-                    local position = bgBox.positionInformations.nextPosition()
                     local icon = avLocation.poiicon
                     if avLocation.id == "w1" then
                         if who == HORDE then
@@ -86,21 +83,10 @@ local function ChatHeraldAction(message)
                     if avLocation.id == "w1" and isExist(avLocation.id) then
                         Get(avLocation.id .. "timer").icon.texture:SetTexCoord(icon.l, icon.r, icon.t, icon.b)
                     else
-                        bgBox.positionInformations.add(
-                            CreateTimer({
-                                text = avLocation.subname,
-                                point = { xf = "TOPRIGHT", yf = "TOPRIGHT", x = position.x, y = position.y },
-                                icon = icon,
-                                isPoi = true,
-                                name = avLocation.name,
-                                id = avLocation.id,
-                                frameParent = bgBox,
-                                size = { w = 162, h = 18 }
-                            })
-                        )
+                        GetAvBox().AddTimer(avLocation, icon)
                     end
                 elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then
-                    bgBox.positionInformations.remove(avLocation.id, bgBox)
+                    GetAvBox().RemoveBar(avLocation.id)
                 end
             end
         end

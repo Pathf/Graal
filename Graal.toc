@@ -1,8 +1,9 @@
 ## Interface : 50400
-## Title : Graal AV
+## Title : Graal
 ## Author : Pathf
 ## Notes : Possiblement un vase, une coupe, un récipient, une pierre incandescente, un bocal à anchois ou une corne d'abondance.
-## Version : 1.3.6
+## Version : 1.4.0
+## SavedVariables: GRAALSAVED
 
 core.lua
 
@@ -14,6 +15,10 @@ UI/icon.lua
 UI/text.lua
 UI/timer.lua
 
+calendar/data.lua
+calendar/calendar.lua
+
+BG/data.lua
 BG/utils.lua
 BG/AV/bossBar.lua
 BG/AV/honorDuringGameText.lua
@@ -22,7 +27,7 @@ BG/AV/onUpdateService.lua
 BG/AV/positionInformations.lua
 BG/AV/avBox.lua
 
-events/player_logout.lua
+events/addon_loaded.lua
 events/update_battlefield_status.lua
 events/chat_msg_combat_honor_gain.lua
 events/chat_msg_monster_yell.lua

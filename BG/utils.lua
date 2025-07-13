@@ -1,8 +1,10 @@
 local utils = GRAAL.BG.Utils
+local avData = GRAAL.BG.Data
 local Ternary = GRAAL.Utils.Ternary
-local honor = GRAAL.Data.honor
 local Get = GRAAL.Utils.Get
 ---
+utils.GetAvBox = function() return Get(avData.NAMEFRAME.AV.BOX) end
+local GetAvBox = utils.GetAvBox
 
 utils.GetCurrentTimeInBG = function()
     local milliseconds = GetBattlefieldInstanceRunTime()
@@ -22,24 +24,18 @@ utils.GetTimeInBGString = function(beforeText, afterText)
 end
 
 utils.Reset = function()
-    local frame = Get("BossBoxFrame")
-    if frame then
-        frame:ClearAllPoints()
-        frame:SetPoint("CENTER", UIParent, "TOPRIGHT", -10, -10)
-    end
-    local reopenFrame = Get("ReopenAVB")
-    if reopenFrame then
-        reopenFrame:ClearAllPoints()
-        reopenFrame:SetPoint("CENTER", UIParent, "TOP", 0, -50)
-    end
+    GetAvBox().Reset()
+end
+
+utils.HardReset = function()
+    GetAvBox().HardReset()
 end
 
 utils.SetHonorGame = function(newHonor)
     newHonor = newHonor or 0
-    honor.duringGame = newHonor
-    Get("BossBoxFrame").honorDuringGame:SetText("Honor: " .. honor.duringGame)
+    GetAvBox().UpdateHonorDuringGame(newHonor)
 end
 
 utils.SetBgGame = function(index)
-    Get("BossBoxFrame").title:SetText("Alterac Valley " .. index)
+    GetAvBox().title:SetText("Alterac Valley " .. index)
 end
