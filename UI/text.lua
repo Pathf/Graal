@@ -18,5 +18,10 @@ GRAAL.Ui.CreateText = function(config)
     end
     if config.text then text:SetText(config.text) end
     if config.hide then text:Hide() end
+
+    text.UpdateText = function(newText)
+        text:SetText(newText)
+    end
+
     return text
 end

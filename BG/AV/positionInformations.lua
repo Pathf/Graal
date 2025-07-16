@@ -1,4 +1,7 @@
 local AV = GRAAL.BG.AV
+
+local TableSize = GRAAL.Utils.TableSize
+local BARTYPE = GRAAL.Data.BARTYPE
 ---
 
 local positionInformations
@@ -45,11 +48,16 @@ local function IsExist(name)
 end
 
 local function RemoveAll()
-    for _, element in ipairs(positionInformations.current) do
+    local numberRemove = TableSize(positionInformations.current)
+    for index = 0, numberRemove do
+        if index == numberRemove then break end
+        local element = positionInformations.current[numberRemove - index]
         element.box:Hide()
+        if element.box.type == BARTYPE.TIMER then element.box:SetScript("OnUpdate", nil) end
+        table.remove(positionInformations.current, numberRemove - index)
+        positionInformations.length = positionInformations.length - 1
     end
-    positionInformations.current = {}
-    positionInformations.length = 1
+    return numberRemove * -1
 end
 
 local function isEmpty()

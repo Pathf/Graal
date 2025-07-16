@@ -6,23 +6,23 @@ local YEAR = date("*t").year
 
 local yearWork = {
     [2025] = {
-        IsWarsongGulch = function(weekNumber, dayNumber) -- multiple de trois +1 ou -1 %3 == 1
-            return ((weekNumber % 3) == 1 and dayNumber > 4) or ((weekNumber % 3) == 2 and dayNumber < 3)
+        IsWarsongGulch = function(weekNumber, dayNumber) -- multiple de trois +1 ou -1
+            return ((weekNumber % 3) == 1 and dayNumber >= 5) or ((weekNumber % 3) == 2 and dayNumber <= 2)
         end,
         IsArathiBasin = function(weekNumber, dayNumber) -- multiple de trois -1 ou +0
-            return ((weekNumber % 3) == 2 and dayNumber > 4) or ((weekNumber % 3) == 0 and dayNumber < 3)
+            return ((weekNumber % 3) == 2 and dayNumber >= 5) or ((weekNumber % 3) == 0 and dayNumber <= 2)
         end,
-        IsAlteracValley = function(weekNumber, dayNumber) -- multiple de trois  +0 ou +1
-            return ((weekNumber % 3) == 0 and dayNumber > 4) or ((weekNumber % 3) == 1 and dayNumber < 3)
+        IsAlteracValley = function(weekNumber, dayNumber) -- multiple de trois +0 ou +1
+            return ((weekNumber % 3) == 0 and dayNumber >= 5) or ((weekNumber % 3) == 1 and dayNumber <= 2)
         end,
         IsNextWarsongGulch = function(weekNumber, dayNumber)
-            return ((weekNumber % 3) == 1 and dayNumber > 3 and dayNumber < 5)
+            return ((weekNumber % 3) == 0 and dayNumber >= 5) or ((weekNumber % 3) == 1 and dayNumber < 5)
         end,
         IsNextArathiBasin = function(weekNumber, dayNumber)
-            return ((weekNumber % 3) == 2 and dayNumber > 3 and dayNumber < 5)
+            return ((weekNumber % 3) == 1 and dayNumber >= 5) or ((weekNumber % 3) == 2 and dayNumber < 5)
         end,
         IsNextAlteracValley = function(weekNumber, dayNumber)
-            return ((weekNumber % 3) == 0 and dayNumber > 3 and dayNumber < 5)
+            return ((weekNumber % 3) == 2 and dayNumber >= 5) or ((weekNumber % 3) == 0 and dayNumber < 5)
         end,
     }
 }

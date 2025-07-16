@@ -45,7 +45,6 @@ end
 --  }
 --}
 
-
 local function CreateBossBar(index, frameParent)
     frameParent = frameParent or UIParent
     local unitInfo = UNITS[index]
@@ -77,6 +76,16 @@ local function CreateBossBar(index, frameParent)
     bossBar.iconEye:Hide()
 
     bossBar.text = CreateLabel(bossBar.textFrame, subname)
+
+    bossBar.Reset = function()
+        bossBar:ClearAllPoints()
+        bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
+        bossBar.healthBar:SetMinMaxValues(0, 100)
+        bossBar.healthBar:SetValue(100)
+        bossBar.text.UpdateText(GetIcon(ICONS.INTEROGATION, 'text') .. " -> " .. subname)
+        bossBar:Show()
+    end
+
     UNITS[index].frame = bossBar
     return bossBar
 end

@@ -81,7 +81,7 @@ local function ChatHeraldAction(message)
                     end
 
                     if avLocation.id == "w1" and isExist(avLocation.id) then
-                        Get(avLocation.id .. "timer").icon.texture:SetTexCoord(icon.l, icon.r, icon.t, icon.b)
+                        Get(avLocation.id .. "timer").ReRunWithNewIcon(icon)
                     else
                         GetAvBox().AddTimer(avLocation, icon)
                     end

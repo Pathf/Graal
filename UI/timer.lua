@@ -60,6 +60,11 @@ GRAAL.Ui.CreateTimer = function(config)
         end)
     end
 
+    frame.ReRunWithNewIcon = function(icon)
+        frame.icon.texture:SetTexCoord(icon.l, icon.r, icon.t, icon.b)
+        frame.runTimer()
+    end
+
     frame.runTimer()
 
     return frame

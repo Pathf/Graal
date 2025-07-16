@@ -18,7 +18,6 @@ local GetIcon = GRAAL.Utils.GetIcon
 ---
 
 local avBox
-local heightFrameBase = 58
 local heightFrame = 58
 
 local positionInformations
@@ -90,14 +89,14 @@ end
 
 local function ResetAllBossBar()
     for _, bar in ipairs(avBox.bossBars) do
+        bar.Reset()
         AddBar(bar)
     end
 end
 
 local function Reset()
     avBox.title:SetText("Alterac Valley")
-    positionInformations.RemoveAll()
-    avBox:SetSize(180, heightFrameBase)
+    Resize(positionInformations.RemoveAll())
     ResetAllBossBar()
 end
 
@@ -105,12 +104,9 @@ local function HardReset()
     avBox:ClearAllPoints()
     avBox:SetPoint("CENTER", UIParent, "TOPRIGHT", -10, -10)
     avBox.title:SetText("Alterac Valley")
-    positionInformations.RemoveAll()
-    avBox:SetSize(180, heightFrameBase)
+    Resize(positionInformations.RemoveAll())
     ResetAllBossBar()
 end
-
-
 
 local function isBarExist(id)
     return positionInformations.IsExist(id)
