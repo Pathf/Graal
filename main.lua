@@ -1,5 +1,4 @@
 -- # TODO :
--- Feature calendar affiché la date / heur de fin de l'event encour
 -- faire une barre qui decremente pour les timers
 -- customisation : faire en sort que le fond soit transparent
 -- communication entre client pour actualisation des données

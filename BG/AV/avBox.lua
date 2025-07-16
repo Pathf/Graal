@@ -15,6 +15,7 @@ local HONOR = GRAAL.Data.honor
 local GetTimeInBGString = GRAAL.BG.Utils.GetTimeInBGString
 local BARTYPE = GRAAL.Data.BARTYPE
 local GetIcon = GRAAL.Utils.GetIcon
+local Calendar = GRAAL.Calendar
 ---
 
 local avBox
@@ -52,11 +53,14 @@ local function CreatePastTimer()
         hide = false
     })
     pastTimer:SetScript("OnEnter", function(self)
-        local currentEvent = GRAAL.Calendar.CurrentEvent()
-        local nextEvent = GRAAL.Calendar.NextEvent()
+        local currentEvent = Calendar.CurrentEvent()
+        local eventFinishIn = Calendar.ResetPvpIn()
+        local nextEvent = Calendar.NextEvent()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         GameTooltip:SetText("Calendar of Events", 1, 1, 1)
         GameTooltip:AddLine("Current Event: " .. Ternary(currentEvent, currentEvent, "None"), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine("Reset PVP in " .. eventFinishIn, 0.8, 0.8,
+            0.8)
         GameTooltip:AddLine("Next Event: " .. Ternary(nextEvent, nextEvent, "None"), 0.8, 0.8, 0.8)
         GameTooltip:Show()
     end)
