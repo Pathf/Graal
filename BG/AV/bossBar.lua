@@ -10,7 +10,9 @@ local GetIcon = GRAAL.Utils.GetIcon
 local GetTargetingFrame = GRAAL.Utils.GetTargetingFrame
 
 local CreateText = GRAAL.Ui.CreateText
+
 ---
+
 local function CreateHealthBar(frame, color)
     local healthBar = CreateFrame("StatusBar", nil, frame)
     healthBar:SetAllPoints()
@@ -45,7 +47,7 @@ end
 --  }
 --}
 
-local function CreateBossBar(index, frameParent)
+av.CreateBossBar = function(index, frameParent)
     frameParent = frameParent or UIParent
     local unitInfo = UNITS[index]
     local yFrame = -25 + ((index - 1) * -18)
@@ -88,14 +90,4 @@ local function CreateBossBar(index, frameParent)
 
     UNITS[index].frame = bossBar
     return bossBar
-end
-
-av.CreateAllBossBar = function(frameParent)
-    local allBossBar = {}
-    for index, _ in ipairs(UNITS) do
-        local bossBar = CreateBossBar(index, frameParent)
-        frameParent.AddBar(bossBar)
-        table.insert(allBossBar, bossBar)
-    end
-    return allBossBar
 end

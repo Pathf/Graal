@@ -10,6 +10,7 @@ AV.OnUpdate = function(_, delta)
         local avBox = GetAvBox()
         avBox.UpdateAllBossHealth()
         avBox.UpdateTime()
+        avBox.CheckChief()
         ELAPSED = 0
     end
 end

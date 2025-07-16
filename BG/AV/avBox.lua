@@ -5,7 +5,8 @@ local CreateHonorDuringGame = GRAAL.BG.AV.CreateHonorDuringGame
 local CreateLockButton = GRAAL.BG.AV.CreateLockButton
 local CreatePositionInformations = GRAAL.BG.AV.CreatePositionInformations
 local OnUpdate = GRAAL.BG.AV.OnUpdate
-local CreateAllBossBar = GRAAL.BG.AV.CreateAllBossBar
+local CreateBossBar = GRAAL.BG.AV.CreateBossBar
+local UNITS = GRAAL.Data.UNITS
 local COLORS = GRAAL.Data.COLORS
 local Get = GRAAL.Utils.Get
 local Ternary = GRAAL.Utils.Ternary
@@ -16,6 +17,8 @@ local GetTimeInBGString = GRAAL.BG.Utils.GetTimeInBGString
 local BARTYPE = GRAAL.Data.BARTYPE
 local GetIcon = GRAAL.Utils.GetIcon
 local Calendar = GRAAL.Calendar
+local CHIEFS = GRAAL.BG.Data.CHIEFS
+local CreateAllChief = GRAAL.BG.AV.CreateAllChief
 ---
 
 local avBox
@@ -98,10 +101,17 @@ local function ResetAllBossBar()
     end
 end
 
+local function ResetAllChiefIcons()
+    for _, chief in ipairs(avBox.chiefIcons) do
+        chief:Hide()
+    end
+end
+
 local function Reset()
     avBox.title:SetText("Alterac Valley")
     Resize(positionInformations.RemoveAll())
     ResetAllBossBar()
+    ResetAllChiefIcons()
 end
 
 local function HardReset()
@@ -110,6 +120,7 @@ local function HardReset()
     avBox.title:SetText("Alterac Valley")
     Resize(positionInformations.RemoveAll())
     ResetAllBossBar()
+    ResetAllChiefIcons()
 end
 
 local function isBarExist(id)
@@ -134,6 +145,17 @@ local function CheckRaiderView(boss, bar)
         avBox.RemoveBar(bar.name)
     end
     return true
+end
+
+local function CheckChief()
+    for _, chief in ipairs(avBox.chiefIcons) do
+        for indexTarget = 1, 40 do
+            local boss = "raid" .. indexTarget .. "target"
+            if UnitExists(boss) and UnitName(boss) == chief.name then
+                chief:Show()
+            end
+        end
+    end
 end
 
 local function UpdateAllBossHealth()
@@ -182,6 +204,16 @@ local function UpdateTime()
     avBox.timer:SetText(GetTimeInBGString())
 end
 
+local function CreateAllBossBar()
+    local allBossBar = {}
+    for index, _ in ipairs(UNITS) do
+        local bossBar = CreateBossBar(index, avBox)
+        avBox.AddBar(bossBar)
+        table.insert(allBossBar, bossBar)
+    end
+    return allBossBar
+end
+
 AV.CreateAvBox = function()
     GRAALSAVED["avBox_x"] = GRAALSAVED["avBox_x"] or -10
     GRAALSAVED["avBox_y"] = GRAALSAVED["avBox_y"] or -10
@@ -221,8 +253,10 @@ AV.CreateAvBox = function()
     avBox.ClosedBox = ClosedBox
     avBox.ShowBox = ShowBox
     avBox.IsShow = IsShow
+    avBox.CheckChief = CheckChief
 
-    avBox.bossBars = CreateAllBossBar(avBox)
+    avBox.bossBars = CreateAllBossBar()
+    avBox.chiefIcons = CreateAllChief(avBox)
 
     avBox:SetScript("OnUpdate", OnUpdate)
 

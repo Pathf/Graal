@@ -1,10 +1,10 @@
 -- # TODO :
+-- reprendre de capping et réarange le Time avant début de la game
 -- faire une barre qui decremente pour les timers
 -- customisation : faire en sort que le fond soit transparent
 -- communication entre client pour actualisation des données
--- reprendre de capping et réarange le Time avant début de la game
 -- reprendre le systeme de command dans le chat de capping
--- chef d'escadrille regarder pop (ambush eye icon)
+-- afficher combien il manque pour le prochain palier
 
 local Logger = GRAAL.Utils.Logger
 local ListenEvent = GRAAL.Event.ListenEvent

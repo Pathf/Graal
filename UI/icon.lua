@@ -18,6 +18,7 @@ GRAAL.Ui.CreateIcon = function(config)
     icon:SetSize(config.size.w, config.size.h)
     icon:SetPoint(config.point.xf, config.frameParent, config.point.yf, config.point.x, config.point.y)
 
+    icon.name = config.name
     icon.texture = icon:CreateTexture(nil, "OVERLAY")
     icon.texture:SetAllPoints()
     if config.isPoi then

@@ -21,6 +21,7 @@ calendar/calendar.lua
 BG/data.lua
 BG/utils.lua
 BG/AV/bossBar.lua
+BG/AV/chiefService.lua
 BG/AV/honorDuringGameText.lua
 BG/AV/lockButton.lua
 BG/AV/onUpdateService.lua
