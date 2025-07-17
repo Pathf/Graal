@@ -17,7 +17,6 @@ local GetTimeInBGString = GRAAL.BG.Utils.GetTimeInBGString
 local BARTYPE = GRAAL.Data.BARTYPE
 local GetIcon = GRAAL.Utils.GetIcon
 local Calendar = GRAAL.Calendar
-local CHIEFS = GRAAL.BG.Data.CHIEFS
 local CreateAllChief = GRAAL.BG.AV.CreateAllChief
 ---
 
@@ -51,10 +50,12 @@ local function CreatePastTimer()
     local pastTimer = CreateText({
         frameParent = avBox,
         font = "GameFontHighlight",
-        point = { xf = "BOTTOMRIGHT", yf = "BOTTOMRIGHT", x = -15, y = 15 },
+        point = { xf = "BOTTOMRIGHT", yf = "BOTTOMRIGHT", x = -10, y = 15 },
         color = COLORS.YELLOW_TITLE,
-        hide = false
+        hide = false,
+        text = "Calendar"
     })
+    pastTimer.UpdateText("Calendar")
     pastTimer:SetScript("OnEnter", function(self)
         local currentEvent = Calendar.CurrentEvent()
         local eventFinishIn = Calendar.ResetPvpIn()
