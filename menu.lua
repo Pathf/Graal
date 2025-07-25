@@ -2,7 +2,7 @@ local Menu = GRAAL.Menu
 
 local ICONS = GRAAL.Data.ICONS
 local CreateButton = GRAAL.Ui.CreateButton
-local GetAvBox = GRAAL.BG.Utils.GetAvBox
+local GetBgBox = GRAAL.BG.Utils.BgBox
 local BgHardReset = GRAAL.BG.Utils.HardReset
 local Reset = GRAAL.Utils.Reset
 ---
@@ -16,9 +16,9 @@ Menu.CreateMinimapButton = function()
         GameTooltip:Show()
     end
     local onClick = function(_, button)
-        local avBox = GetAvBox()
+        local bgBox = GetBgBox()
         if button == "LeftButton" then
-            if avBox.IsShow() then avBox.ClosedBox() else avBox.ShowBox() end
+            if bgBox.IsShow() then bgBox.ClosedBox() else bgBox.ShowBox() end
         elseif button == "RightButton" then
             Reset()
             BgHardReset()

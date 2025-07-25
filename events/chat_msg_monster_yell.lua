@@ -2,8 +2,9 @@ local LOCATIONS = GRAAL.Data.LOCATIONS
 local EscapePattern = GRAAL.Utils.EscapePattern
 local POIICON = GRAAL.Data.POIICON
 local REGISTERS = GRAAL.Event.registers
-local GetAvBox = GRAAL.BG.Utils.GetAvBox
+local GetBgBox = GRAAL.BG.Utils.BgBox
 local Get = GRAAL.Utils.Get
+local BATTLEFIELD = GRAAL.BG.Data.BATTLEFIELD
 ---
 
 local ALLY = "Alliance"
@@ -55,7 +56,7 @@ local function ParseHeraldMessage(message)
     return nil, nil, who
 end
 
-local function isExist(id) return GetAvBox().isBarExist(id) end
+local function isExist(id) return GetBgBox().AV.isBarExist(id) end
 local function isAttacked(action, avLocation)
     return action == ATTACKING and
         (not isExist(avLocation.id) or avLocation.id == "w1")
@@ -83,10 +84,10 @@ local function ChatHeraldAction(message)
                     if avLocation.id == "w1" and isExist(avLocation.id) then
                         Get(avLocation.id .. "timer").ReRunWithNewIcon(icon)
                     else
-                        GetAvBox().AddTimer(avLocation, icon)
+                        GetBgBox().AV.AddTimer(avLocation, icon)
                     end
                 elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then
-                    GetAvBox().RemoveBar(avLocation.id)
+                    GetBgBox().AV.RemoveBar(avLocation.id)
                 end
             end
         end
@@ -94,6 +95,11 @@ local function ChatHeraldAction(message)
 end
 
 local eventName = "CHAT_MSG_MONSTER_YELL"
-local eventAction = function(message) ChatHeraldAction(message) end
+local eventAction = function(message)
+    local bgBox = GetBgBox()
+    if bgBox.currentIdBg == BATTLEFIELD.WG.id then Logger("test WG") end -- FIXME
+    if bgBox.currentIdBg == BATTLEFIELD.AB.id then Logger("test AB") end -- FIXME
+    if bgBox.currentIdBg == BATTLEFIELD.AV.id then ChatHeraldAction(message) end
+end
 
 table.insert(REGISTERS, { name = eventName, action = eventAction })

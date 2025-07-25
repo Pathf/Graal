@@ -8,7 +8,7 @@ local function CreateChief(chief, frameParent)
     local chiefIcon = CreateIcon({
         icon = chief.icon,
         isPoi = true,
-        point = { xf = "BOTTOM", yf = "BOTTOM", x = chief.x, y = -18 },
+        point = { xf = "BOTTOM", yf = "BOTTOM", x = chief.x, y = -22 },
         name = chief.name,
         frameParent = frameParent,
         size = { w = 20, h = 20 },
@@ -29,7 +29,6 @@ end
 av.CreateAllChief = function(frameParent)
     local chiefIcons = {}
     for _, chief in ipairs(CHIEFS) do
-        Logger(chief.name)
         table.insert(chiefIcons, CreateChief(chief, frameParent))
     end
     return chiefIcons

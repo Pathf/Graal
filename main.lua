@@ -6,6 +6,8 @@
 -- customisation : faire en sort que le fond soit transparent
 -- communication entre client pour actualisation des données
 
+-- WTF : C:\Users\<user>\Documents\My Games\battle.net\World of Warcraft\_classic_era_\WTF
+
 local Logger = GRAAL.Utils.Logger
 local ListenEvent = GRAAL.Event.ListenEvent
 local CreateMinimapButton = GRAAL.Menu.CreateMinimapButton

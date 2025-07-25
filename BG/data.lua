@@ -5,9 +5,24 @@ local POIICON = GRAAL.Data.POIICON
 ---
 
 data.NAMEFRAME = {
+    BG = {
+        BOX = "BG_BOX",
+    },
     AV = {
         BOX = "AV_BOX",
         CLOSEBUTTON = "AV_BOXClose"
+    }
+}
+
+data.BATTLEFIELD = {
+    AV = {
+        id = "BATTLEFIELD_AV", name = "Alterac Valley", frName = "Vallée d'Alterac"
+    },
+    AB = {
+        id = "BATTLEFIELD_AB", name = "Arathi Basin"
+    },
+    WG = {
+        id = "BATTLEFIELD_WG", name = "Warsong Gulsh"
     }
 }
 

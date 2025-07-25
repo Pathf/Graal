@@ -1,7 +1,7 @@
 local ADDONNAME = 'Graal'
 local REGISTERS = GRAAL.Event.registers
 local Logger = GRAAL.Utils.Logger
-local CreateAvBox = GRAAL.BG.AV.CreateAvBox
+local CreateBgBox = GRAAL.BG.CreateBgBox
 
 ---
 
@@ -11,7 +11,7 @@ local eventAction = function(name)
         --GRAALSAVED.counter = (GRAALSAVED.counter or 0) + 1
         --print("Tu as chargé", ADDONNAME, GRAALSAVED.counter, "fois.")
         Logger("Graal trouvé ! (version: ", VERSION, ")")
-        CreateAvBox()
+        CreateBgBox()
     end
 end
 

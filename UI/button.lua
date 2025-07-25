@@ -23,8 +23,7 @@ local function CreateFrameForButton(name, frameParent, template)
     if template then
         return CreateFrame("Button", name, frameParent, template)
     else
-        return CreateFrame("Button", name,
-            frameParent)
+        return CreateFrame("Button", name, frameParent)
     end
 end
 
@@ -85,3 +84,18 @@ GRAAL.Ui.CreateButton = function(config)
     if config.hide then button:Hide() end
     return button
 end
+
+-- GRAAL.Ui.CreateButton({
+--     frameParent = UIParent,                                 -- *
+--     point = { xf = "CENTER", yf = "CENTER", x = 0, y = 0 }, -- *
+--     name = "buttontest",
+--     text = "ExampleText",
+--     template = "UIPanelButtonTemplate",
+--     script = {
+--         onDragStart = function() print("test") end,
+--         stop = function() print("test") end,
+--         onClick = function() print("test") end,
+--         onEnter = function() print("test") end,
+--         onLeave = function() print("test") end
+--     },
+-- })

@@ -12,6 +12,7 @@ GRAAL = {
     BG = {
         Data = {},
         Utils = {},
+        Part = {},
         AV = {
             Component = {}
         }

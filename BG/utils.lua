@@ -1,10 +1,16 @@
 local utils = GRAAL.BG.Utils
-local avData = GRAAL.BG.Data
+local bgData = GRAAL.BG.Data
 local Ternary = GRAAL.Utils.Ternary
 local Get = GRAAL.Utils.Get
+local BATTLEFIELD = GRAAL.BG.Data.BATTLEFIELD
 ---
-utils.GetAvBox = function() return Get(avData.NAMEFRAME.AV.BOX) end
-local GetAvBox = utils.GetAvBox
+
+local bgBoxIntern
+utils.BgBox = function()
+    if not bgBoxIntern then bgBoxIntern = Get(bgData.NAMEFRAME.BG.BOX) end
+    return bgBoxIntern
+end
+local GetBgBox = utils.BgBox
 
 utils.GetCurrentTimeInBG = function()
     local milliseconds = GetBattlefieldInstanceRunTime()
@@ -23,19 +29,21 @@ utils.GetTimeInBGString = function(beforeText, afterText)
     return beforeText .. text .. afterText
 end
 
-utils.Reset = function()
-    GetAvBox().Reset()
-end
-
 utils.HardReset = function()
-    GetAvBox().HardReset()
+    GetBgBox().HardReset()
 end
 
 utils.SetHonorGame = function(newHonor)
     newHonor = newHonor or 0
-    GetAvBox().UpdateHonorDuringGame(newHonor)
+    GetBgBox().UpdateHonorDuringGame(newHonor)
 end
 
-utils.SetBgGame = function(index)
-    GetAvBox().title:SetText("Alterac Valley " .. index)
+local function GetBattleGround(mapName)
+    if mapName == BATTLEFIELD.WG.frName then return BATTLEFIELD.WG.id end
+    if mapName == BATTLEFIELD.AB.frName then return BATTLEFIELD.AB.id end
+    if mapName == BATTLEFIELD.AV.frName then return BATTLEFIELD.AV.id end
+end
+
+utils.SetBgGame = function(index, mapName)
+    GetBgBox().ShowBody(index, GetBattleGround(mapName))
 end
