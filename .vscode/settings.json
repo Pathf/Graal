@@ -16,6 +16,8 @@
         "GetBattlefieldStatus",
         "GetAddOnMetadata",
         "date",
-        "time"
+        "time",
+        "GetBattlefieldEstimatedWaitTime",
+        "GetBattlefieldTimeWaited"
     ]
 }

@@ -84,7 +84,8 @@ local function ChatHeraldAction(message)
                     if avLocation.id == "w1" and isExist(avLocation.id) then
                         Get(avLocation.id .. "timer").ReRunWithNewIcon(icon)
                     else
-                        GetBgBox().AV.AddTimer(avLocation, icon)
+                        local bgBox = GetBgBox()
+                        bgBox.AV.AddTimer(bgBox.AV, avLocation, icon)
                     end
                 elseif isSaved(action, avLocation) or isCaptured(action, avLocation) or isDestroyed(action, avLocation) then
                     GetBgBox().AV.RemoveBar(avLocation.id)

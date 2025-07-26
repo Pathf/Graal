@@ -64,11 +64,47 @@ local function UpdateHonorDuringGame(newHonor)
     BgBox().honorDuringGame:SetText("Honor: " .. newHonor)
 end
 
-local function UpdateTime()
+local function TimeInText(milliseconds)
+    local totalSeconds = math.floor(milliseconds / 1000)
+    local minutes = math.floor(totalSeconds / 60)
+    local seconds = totalSeconds % 60
+    return Ternary(
+        minutes > 0,
+        minutes .. ":" .. Ternary(seconds > 9, seconds, "0" .. seconds),
+        seconds
+    )
+end
+
+local queueTimer = nil
+local elapsedQueueTimer = 0
+local function GetQueueTimerFrame()
+    if not queueTimer then
+        queueTimer = CreateFrame("Frame", "QueueTimerFrame")
+    end
+    return queueTimer
+end
+
+local function UpdateTime(index)
+    index = index or 0
     local bgBox = BgBox()
-    if bgBox.currentIdBg then
+    if bgBox.currentIdBg and index == 0 then
         bgBox.timer:SetText(GetTimeInBGString())
-    else
+    elseif index > 0 and GetQueueTimerFrame():GetScript("OnUpdate") == nil then
+        GetQueueTimerFrame():SetScript("OnUpdate", function(self, elapsed)
+            elapsedQueueTimer = elapsedQueueTimer + elapsed
+            if elapsedQueueTimer >= 0.5 then
+                if bgBox.instanceID == nil then
+                    local waitedTime = TimeInText(GetBattlefieldTimeWaited(index))
+                    local queueTime = math.floor(math.floor(GetBattlefieldEstimatedWaitTime(index) / 1000) / 60)
+                    bgBox.timer:SetText(waitedTime .. " (>=" .. queueTime .. "min)")
+                else
+                    elapsedQueueTimer = 0
+                    self:SetScript("OnUpdate", nil)
+                end
+            end
+        end)
+    elseif index == -1 then
+        GetQueueTimerFrame():SetScript("OnUpdate", nil)
         bgBox.timer.UpdateText("Calendar")
     end
 end

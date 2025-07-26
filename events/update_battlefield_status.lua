@@ -16,6 +16,8 @@ local function eventAction()
         elseif status == "confirm" then                             -- Invité à rejoindre la bataille
             SetHonorGame()
             if ENV then Logger(mapName) end
+        elseif status == "queued" then -- Dans la file d'attente
+            BgBox().UpdateTime(i)
         end
     end
 end

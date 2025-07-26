@@ -10,7 +10,6 @@ local GetIcon = GRAAL.Utils.GetIcon
 local GetTargetingFrame = GRAAL.Utils.GetTargetingFrame
 
 local CreateText = GRAAL.Ui.CreateText
-
 ---
 
 local function CreateHealthBar(frame, color)
@@ -35,23 +34,10 @@ local function CreateLabel(frame, subname)
     })
 end
 
---local configBossBarExample = {
---  name= "ExampleBossBar",
---  frameParent=UIParent,
---  point= { xf= "TOPRIGHT", yf= "TOPRIGHT", x= 0, y= 0 },
---  size= { w= 162, h= 18 }
---  unitInfo= {
---      name=,
---      subname=,
---      color=
---  }
---}
-
-av.CreateBossBar = function(index, frameParent)
+local function CreateBossBar(unit, frameParent)
     frameParent = frameParent or UIParent
-    local unitInfo = UNITS[index]
-    local yFrame = -25 + ((index - 1) * -18)
-    local name, subname, color, icon = unitInfo.name, unitInfo.subname, unitInfo.color, unitInfo.icon
+    local yFrame = -25 + (unit.index * -18)
+    local name, subname, color, icon = unit.name, unit.subname, unit.color, unit.icon
 
     local bossBar = CreateFrame("Frame", name .. "HealthFrame", frameParent)
     bossBar.name = name
@@ -88,6 +74,59 @@ av.CreateBossBar = function(index, frameParent)
         bossBar:Show()
     end
 
-    UNITS[index].frame = bossBar
     return bossBar
+end
+
+
+local function CheckRaiderView(avFrame, boss, bar)
+    local hp, maxHp, percentage = UnitHealth(boss), UnitHealthMax(boss), 100
+    if maxHp and maxHp > 0 then percentage = hp / maxHp * 100 end
+    bar.healthBar:SetMinMaxValues(0, maxHp)
+    bar.healthBar:SetValue(hp)
+    bar.text:SetText(GetIcon(bar.icon, 'text') .. " -> " .. string.format("%s - %d%%", bar.subname, percentage))
+    bar.iconEye:Show()
+    if percentage == 0 then
+        avFrame.RemoveBar(bar.name)
+    end
+    return true
+end
+
+local function UpdateAllBossHealth(avFrame)
+    local allBossBar = {}
+    for _, bar in ipairs(avFrame.positionInformations.current) do
+        if bar.box.type == BARTYPE.BOSS then
+            table.insert(allBossBar, bar.box)
+        end
+    end
+
+    for _, bar in ipairs(allBossBar) do
+        local hasRaiderView = false
+        for i = 1, 40 do
+            local boss = "raid" .. i .. "target"
+            if UnitExists(boss) and UnitName(boss) == bar.name then
+                hasRaiderView = CheckRaiderView(avFrame, boss, bar)
+            end
+        end
+        if not hasRaiderView then bar.iconEye:Hide() end
+    end
+end
+
+local function ResetAllBossBar(avFrame)
+    for _, bar in ipairs(avFrame.bossBars) do
+        bar.Reset()
+        avFrame.AddBar(bar)
+    end
+end
+
+av.CreateAllBossBar = function(avFrame)
+    local allBossBar = {}
+    for _, unit in ipairs(UNITS) do
+        local bossBar = CreateBossBar(unit, avFrame)
+        avFrame.AddBar(bossBar)
+        table.insert(allBossBar, bossBar)
+    end
+
+    avFrame.UpdateAllBossHealth = UpdateAllBossHealth
+    avFrame.ResetAllBossBar = ResetAllBossBar
+    return allBossBar
 end

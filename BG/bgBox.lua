@@ -33,7 +33,7 @@ local function Reset()
     bgBox.HideBody()
     bgBox.title:SetText(bgBox.titleText)
     UpdateHeigthBox(HEIGHTFIX)
-    bgBox.UpdateTime()
+    bgBox.UpdateTime(-1)
 end
 
 local function HardReset()
@@ -41,7 +41,7 @@ local function HardReset()
     bgBox:SetPoint("CENTER", UIParent, "TOPRIGHT", -10, -10)
     bgBox.title:SetText(bgBox.titleText)
     UpdateHeigthBox(HEIGHTFIX)
-    bgBox.UpdateTime()
+    bgBox.UpdateTime(-1)
 end
 
 local function AddHeightBox(modHeightBox)

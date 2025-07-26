@@ -21,12 +21,20 @@ utils.GetCurrentTimeInBG = function()
     return { minutes = minutes, seconds = seconds }
 end
 
-utils.GetTimeInBGString = function(beforeText, afterText)
-    beforeText = beforeText or ''
-    afterText = afterText or ''
+utils.GetTimeInBGString = function()
     local time = utils.GetCurrentTimeInBG()
-    local text = Ternary(time.minutes < 1, string.format("%01dsec", time.seconds), string.format("%01dmin", time.minutes))
-    return beforeText .. text .. afterText
+    local beforeText = ""
+    if time.minutes < 2 then
+        local secondesBeforeStart = 120 - (time.minutes * 60 + time.seconds)
+        time.minutes = math.floor(secondesBeforeStart / 60)
+        time.seconds = secondesBeforeStart % 60
+        beforeText = "Start in "
+    end
+    return beforeText .. Ternary(
+        time.minutes > 0,
+        time.minutes .. ":" .. Ternary(time.seconds > 9, time.seconds, "0" .. time.seconds),
+        time.seconds
+    )
 end
 
 utils.HardReset = function()

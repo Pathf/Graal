@@ -1,10 +1,10 @@
 -- # TODO :
--- reprendre de capping et réarange le Time avant début de la game
 -- faire une barre qui decremente pour les timers
 -- reprendre le systeme de command dans le chat de capping
 -- afficher combien il manque pour le prochain palier
 -- customisation : faire en sort que le fond soit transparent
 -- communication entre client pour actualisation des données
+-- faire en sorte que le chef de la horde pop quand il se fait attaquer et disparisse des le wipe
 
 -- WTF : C:\Users\<user>\Documents\My Games\battle.net\World of Warcraft\_classic_era_\WTF
 

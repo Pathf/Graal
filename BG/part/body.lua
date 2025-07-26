@@ -6,16 +6,19 @@ local function ShowBody(idInstance, idBg)
     local bgBox = BgBox()
     if idBg == BATTLEFIELD.WG.id then
         bgBox.currentIdBg = BATTLEFIELD.WG.id
+        bgBox.instanceID = idInstance
         bgBox.UpdateTitle("Warsong Gulsh " .. idInstance)
         if not bgBox.WG:IsVisible() then bgBox.WG.ShowBody(idInstance) end
     end
     if idBg == BATTLEFIELD.AB.id then
         bgBox.currentIdBg = BATTLEFIELD.AB.id
+        bgBox.instanceID = idInstance
         bgBox.UpdateTitle("Arathi Basin " .. idInstance)
         if not bgBox.AB:IsVisible() then bgBox.AB.ShowBody(idInstance) end
     end
     if idBg == BATTLEFIELD.AV.id then
         bgBox.currentIdBg = BATTLEFIELD.AV.id
+        bgBox.instanceID = idInstance
         bgBox.UpdateTitle("Alterac Valley " .. idInstance)
         if not bgBox.AV:IsVisible() then bgBox.AV.ShowBody(idInstance) end
     end
@@ -27,6 +30,7 @@ local function HideBody()
     if bgBox.currentIdBg == BATTLEFIELD.AB.id then bgBox.AB.HideBody() end
     if bgBox.currentIdBg == BATTLEFIELD.AV.id then bgBox.AV.HideBody() end
     bgBox.currentIdBg = nil
+    bgBox.instanceID = nil
 end
 
 local function Update()

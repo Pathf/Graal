@@ -26,10 +26,30 @@ local function CreateChief(chief, frameParent)
     return chiefIcon
 end
 
-av.CreateAllChief = function(frameParent)
+local function UpdateChief(chiefs)
+    for _, chief in ipairs(chiefs) do
+        for indexTarget = 1, 40 do
+            local boss = "raid" .. indexTarget .. "target"
+            if UnitExists(boss) and UnitName(boss) == chief.name then
+                chief:Show()
+            end
+        end
+    end
+end
+
+local function ResetAllChiefIcons(chiefs)
+    for _, chief in ipairs(chiefs) do
+        chief:Hide()
+    end
+end
+
+av.CreateAllChief = function(avFrame)
     local chiefIcons = {}
     for _, chief in ipairs(CHIEFS) do
-        table.insert(chiefIcons, CreateChief(chief, frameParent))
+        table.insert(chiefIcons, CreateChief(chief, avFrame))
     end
+
+    avFrame.UpdateChief = UpdateChief
+    avFrame.ResetAllChiefIcons = ResetAllChiefIcons
     return chiefIcons
 end
