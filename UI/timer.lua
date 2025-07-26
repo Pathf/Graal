@@ -52,7 +52,16 @@ GRAAL.Ui.CreateTimer = function(config)
     frame.cooldownText:SetFont("Fonts\\FRIZQT__.TTF", 10)
     frame.cooldownText:SetPoint("LEFT", frame, "LEFT", 15, 0)
 
-    frame.colorBar = CreateColorBar(frame, COLORS.GRAY, config.time)
+    frame.colorBar = CreateColorBar(frame, COLORS.GRAY_WHITE, config.time)
+
+    frame:EnableMouse(true)
+    frame:SetScript("OnMouseDown", function(_, button)
+        if IsShiftKeyDown() and button == "LeftButton" then
+            frame:Hide()
+            config.frameParent.RemoveBar(config.id)
+            frame:SetScript("OnUpdate", nil)
+        end
+    end)
 
     frame.runTimer = function()
         frame:Show()

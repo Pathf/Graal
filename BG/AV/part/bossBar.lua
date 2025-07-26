@@ -34,18 +34,18 @@ local function CreateLabel(frame, subname)
     })
 end
 
-local function CreateBossBar(unit, frameParent)
-    frameParent = frameParent or UIParent
+local function CreateBossBar(unit, avFrame)
+    avFrame = avFrame or UIParent
     local yFrame = -25 + (unit.index * -18)
     local name, subname, color, icon = unit.name, unit.subname, unit.color, unit.icon
 
-    local bossBar = CreateFrame("Frame", name .. "HealthFrame", frameParent)
+    local bossBar = CreateFrame("Frame", name .. "HealthFrame", avFrame)
     bossBar.name = name
     bossBar.subname = subname
     bossBar.icon = icon
     bossBar.type = BARTYPE.BOSS
     bossBar:SetSize(162, 18)
-    bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
+    bossBar:SetPoint("TOPRIGHT", avFrame, "TOPRIGHT", -8, yFrame)
     bossBar:SetClampedToScreen(true)
     bossBar:SetFrameStrata("MEDIUM")
     bossBar:SetFrameLevel(5)
@@ -67,12 +67,19 @@ local function CreateBossBar(unit, frameParent)
 
     bossBar.Reset = function()
         bossBar:ClearAllPoints()
-        bossBar:SetPoint("TOPRIGHT", frameParent, "TOPRIGHT", -8, yFrame)
+        bossBar:SetPoint("TOPRIGHT", avFrame, "TOPRIGHT", -8, yFrame)
         bossBar.healthBar:SetMinMaxValues(0, 100)
         bossBar.healthBar:SetValue(100)
         bossBar.text.UpdateText(GetIcon(ICONS.INTEROGATION, 'text') .. " -> " .. subname)
         bossBar:Show()
     end
+
+    bossBar:EnableMouse(true)
+    bossBar:SetScript("OnMouseDown", function(_, button)
+        if IsShiftKeyDown() and button == "LeftButton" then
+            avFrame.RemoveBar(bossBar.name)
+        end
+    end)
 
     return bossBar
 end

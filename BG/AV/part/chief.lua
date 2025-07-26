@@ -14,6 +14,11 @@ local function CreateChief(chief, frameParent)
         size = { w = 20, h = 20 },
         hide = false
     })
+    chiefIcon:SetScript("OnMouseDown", function(_, button)
+        if IsShiftKeyDown() and button == "LeftButton" then
+            chiefIcon:Hide()
+        end
+    end)
     chiefIcon:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         GameTooltip:SetText("Chief " .. chief.subname .. " has not been saved", 1, 1, 1)
