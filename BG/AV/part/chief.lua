@@ -16,13 +16,12 @@ local function CreateChief(chief, frameParent)
     })
     chiefIcon:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Chief " .. chief.subname .. " has been view", 1, 1, 1)
+        GameTooltip:SetText("Chief " .. chief.subname .. " has not been saved", 1, 1, 1)
         GameTooltip:Show()
     end)
     chiefIcon:SetScript("OnLeave", function()
         GameTooltip:Hide()
     end)
-    chiefIcon:Hide()
     return chiefIcon
 end
 
@@ -31,7 +30,7 @@ local function UpdateChief(chiefs)
         for indexTarget = 1, 40 do
             local boss = "raid" .. indexTarget .. "target"
             if UnitExists(boss) and UnitName(boss) == chief.name then
-                chief:Show()
+                chief:Hide()
             end
         end
     end
@@ -39,7 +38,7 @@ end
 
 local function ResetAllChiefIcons(chiefs)
     for _, chief in ipairs(chiefs) do
-        chief:Hide()
+        chief:Show()
     end
 end
 
