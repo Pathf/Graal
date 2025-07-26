@@ -1,5 +1,4 @@
 -- # TODO :
--- faire une barre qui decremente pour les timers
 -- reprendre le systeme de command dans le chat de capping
 -- afficher combien il manque pour le prochain palier
 -- customisation : faire en sort que le fond soit transparent

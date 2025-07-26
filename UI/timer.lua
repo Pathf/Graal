@@ -11,7 +11,22 @@
 
 local Ternary = GRAAL.Utils.Ternary
 local BARTYPE = GRAAL.Data.BARTYPE
+local GetTargetingFrame = GRAAL.Utils.GetTargetingFrame
+local TARGETINGFRAME = GRAAL.Data.TARGETINGFRAME
+local COLORS = GRAAL.Data.COLORS
 --
+
+local function CreateColorBar(frame, color, time)
+    local colorBar = CreateFrame("StatusBar", nil, frame)
+    colorBar:SetAllPoints()
+    colorBar:SetStatusBarTexture(GetTargetingFrame(TARGETINGFRAME.STATUSBAR))
+    colorBar:SetStatusBarColor(color.r, color.g, color.b)
+    colorBar:SetMinMaxValues(0, time)
+    colorBar:SetValue(time)
+    colorBar:SetFrameStrata("MEDIUM")
+    colorBar:SetFrameLevel(5)
+    return colorBar
+end
 
 GRAAL.Ui.CreateTimer = function(config)
     config.frameParent = config.frameParent or UIParent
@@ -37,6 +52,8 @@ GRAAL.Ui.CreateTimer = function(config)
     frame.cooldownText:SetFont("Fonts\\FRIZQT__.TTF", 10)
     frame.cooldownText:SetPoint("LEFT", frame, "LEFT", 15, 0)
 
+    frame.colorBar = CreateColorBar(frame, COLORS.GRAY, config.time)
+
     frame.runTimer = function()
         frame:Show()
         frame.duration = config.time
@@ -51,6 +68,7 @@ GRAAL.Ui.CreateTimer = function(config)
                     string.format("%01d", time.seconds),
                     string.format(Ternary(time.seconds > 9, "%01d:%01d", "%01d:0%01d"), time.minutes, time.seconds)
                 )
+                frame.colorBar:SetValue(remaining)
                 frame.cooldownText:SetText(config.text .. " - " .. text)
             else
                 frame:Hide()

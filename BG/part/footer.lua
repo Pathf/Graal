@@ -96,7 +96,7 @@ local function UpdateTime(index)
                 if bgBox.instanceID == nil then
                     local waitedTime = TimeInText(GetBattlefieldTimeWaited(index))
                     local queueTime = math.floor(math.floor(GetBattlefieldEstimatedWaitTime(index) / 1000) / 60)
-                    bgBox.timer:SetText(waitedTime .. " (>=" .. queueTime .. "min)")
+                    bgBox.timer:SetText(waitedTime .. " (>=" .. queueTime .. "m)")
                 else
                     elapsedQueueTimer = 0
                     self:SetScript("OnUpdate", nil)

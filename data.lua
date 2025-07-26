@@ -15,6 +15,7 @@ data.COLORS = {
     GREEN = { r = 0, g = 1, b = 0 },
     BLUE = { r = 0, g = 0, b = 1 },
     BLACK = { r = 0, g = 0, b = 0 },
+    GRAY = { r = 0.5, g = 0.5, b = 0.5 },
     WHITE = { r = 1, g = 1, b = 1 },
     PURPLE = { r = 1, g = 0, b = 1 },
     YELLOW = { r = 1, g = 1, b = 0 },
@@ -112,18 +113,18 @@ data.TARGETINGFRAME = {
 }
 
 data.UNITS = {
-    { index = 0, name = "Vanndar Stormpike",            color = data.COLORS.RED,    subname = "Vanndar",      icon = data.ICONS.DWARF.O },
-    { index = 1, name = "Commandant Mortimer",          color = data.COLORS.RED,    subname = "Mortimer",     icon = data.ICONS.DWARF.M },
-    { index = 2, name = "Commandant Duffy",             color = data.COLORS.RED,    subname = "Duffy",        icon = data.ICONS.DWARF.M },
-    { index = 3, name = "Commandant Karl Philips",      color = data.COLORS.PURPLE, subname = "Karl Philips", icon = data.ICONS.HUMAN.M },
-    { index = 4, name = "Capitaine Balinda Stonehearth", color = data.COLORS.BLUE,  subname = "Balinda",      icon = data.ICONS.HUMAN.F },
-    { index = 5, name = "Lieutenant Lonadin",           color = data.COLORS.BLUE,   subname = "Lonadin",      icon = data.ICONS.NIGHTELF.M },
-    { index = 6, name = "Commandant Randolph",          color = data.COLORS.BLUE,   subname = "Randolph",     icon = data.ICONS.NIGHTELF.M },
-    { index = 7, name = "Lieutenant Stouthandle",       color = data.COLORS.BLUE,   subname = "Stouthandle",  icon = data.ICONS.DWARF.M },
-    { index = 8, name = "Lieutenant Largent",           color = data.COLORS.BLUE,   subname = "Largent",      icon = data.ICONS.HUMAN.M },
-    { index = 9, name = "Lieutenant Mancuso",           color = data.COLORS.BLUE,   subname = "Mancuso",      icon = data.ICONS.HUMAN.M },
-    { index = 10, name = "Lieutenant Spencer",          color = data.COLORS.BLUE,   subname = "Spencer",      icon = data.ICONS.HUMAN.M },
-    { index = 11, name = "Lieutenant Greywand",         color = data.COLORS.BLUE,   subname = "Greywand",     icon = data.ICONS.GNOME.M }
+    { index = 0,  name = "Vanndar Stormpike",             color = data.COLORS.RED,    subname = "Vanndar",      icon = data.ICONS.DWARF.O },
+    { index = 1,  name = "Commandant Mortimer",           color = data.COLORS.RED,    subname = "Mortimer",     icon = data.ICONS.DWARF.M },
+    { index = 2,  name = "Commandant Duffy",              color = data.COLORS.RED,    subname = "Duffy",        icon = data.ICONS.DWARF.M },
+    { index = 3,  name = "Commandant Karl Philips",       color = data.COLORS.PURPLE, subname = "Karl Philips", icon = data.ICONS.HUMAN.M },
+    { index = 4,  name = "Capitaine Balinda Stonehearth", color = data.COLORS.BLUE,   subname = "Balinda",      icon = data.ICONS.HUMAN.F },
+    { index = 5,  name = "Lieutenant Lonadin",            color = data.COLORS.BLUE,   subname = "Lonadin",      icon = data.ICONS.NIGHTELF.M },
+    { index = 6,  name = "Commandant Randolph",           color = data.COLORS.BLUE,   subname = "Randolph",     icon = data.ICONS.NIGHTELF.M },
+    { index = 7,  name = "Lieutenant Stouthandle",        color = data.COLORS.BLUE,   subname = "Stouthandle",  icon = data.ICONS.DWARF.M },
+    { index = 8,  name = "Lieutenant Largent",            color = data.COLORS.BLUE,   subname = "Largent",      icon = data.ICONS.HUMAN.M },
+    { index = 9,  name = "Lieutenant Mancuso",            color = data.COLORS.BLUE,   subname = "Mancuso",      icon = data.ICONS.HUMAN.M },
+    { index = 10, name = "Lieutenant Spencer",            color = data.COLORS.BLUE,   subname = "Spencer",      icon = data.ICONS.HUMAN.M },
+    { index = 11, name = "Lieutenant Greywand",           color = data.COLORS.BLUE,   subname = "Greywand",     icon = data.ICONS.GNOME.M }
 }
 
 data.LOCATIONS = {
