@@ -9,7 +9,7 @@ av.AddTimer = function(avFrame, location, icon)
         CreateTimer({
             text = location.subname,
             point = { xf = "TOPRIGHT", yf = "TOPRIGHT", x = position.x, y = position.y },
-            time = 300,
+            time = 305,
             icon = icon,
             isPoi = true,
             name = location.name,

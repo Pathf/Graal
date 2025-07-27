@@ -24,8 +24,8 @@ end
 utils.GetTimeInBGString = function()
     local time = utils.GetCurrentTimeInBG()
     local beforeText = ""
-    if time.minutes < 2 or (time.minutes == 2 and time.seconds < 5) then
-        local secondesBeforeStart = 120 - (time.minutes * 60 + time.seconds)
+    if time.minutes < 2 or (time.minutes == 2 and time.seconds < 4) then
+        local secondesBeforeStart = 123 - (time.minutes * 60 + time.seconds)
         time.minutes = math.floor(secondesBeforeStart / 60)
         time.seconds = secondesBeforeStart % 60
         beforeText = "Start in "

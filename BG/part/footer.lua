@@ -6,6 +6,12 @@ local CreateText = GRAAL.Ui.CreateText
 local BgBox, GetTimeInBGString = GRAAL.BG.Utils.BgBox, GRAAL.BG.Utils.GetTimeInBGString
 ---
 
+local function GetHonorPerHour(timeSinceStartSession)
+    local honorSession = HONOR.session * 60
+    local minutesSinceStartSession = (timeSinceStartSession.hours * 60) + timeSinceStartSession.minutes
+    return math.floor(honorSession / minutesSinceStartSession)
+end
+
 local function CreateHonorDuringGame()
     local honorDuring = CreateText({
         frameParent = BgBox(),
@@ -17,7 +23,7 @@ local function CreateHonorDuringGame()
     })
     honorDuring:SetScript("OnEnter", function(self)
         local timeSinceStartSession = BuildTime(TimeSession())
-        local honorPerHour = HONOR.session / Ternary(timeSinceStartSession.hours > 1, timeSinceStartSession.hours, 1)
+        local honorPerHour = GetHonorPerHour(timeSinceStartSession)
         local honorWeek = Get("HonorFrameThisWeekContributionValue"):GetText()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         GameTooltip:SetText("Honor stats", 1, 1, 1)
@@ -48,9 +54,8 @@ local function CreatePastTimer()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
         GameTooltip:SetText("Calendar of Events", 1, 1, 1)
         GameTooltip:AddLine("Current Event: " .. Ternary(currentEvent, currentEvent, "None"), 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Reset PVP in " .. eventFinishIn, 0.8, 0.8,
-            0.8)
         GameTooltip:AddLine("Next Event: " .. Ternary(nextEvent, nextEvent, "None"), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine("Reset PVP in " .. eventFinishIn, 0.8, 0.8, 0.8)
         GameTooltip:Show()
     end)
     pastTimer:SetScript("OnLeave", function()
@@ -95,8 +100,8 @@ local function UpdateTime(index)
             if elapsedQueueTimer >= 0.5 then
                 if bgBox.instanceID == nil then
                     local waitedTime = TimeInText(GetBattlefieldTimeWaited(index))
-                    local queueTime = math.floor(math.floor(GetBattlefieldEstimatedWaitTime(index) / 1000) / 60)
-                    bgBox.timer:SetText(waitedTime .. " (>=" .. queueTime .. "m)")
+                    local queueTime = TimeInText(GetBattlefieldEstimatedWaitTime(index))
+                    bgBox.timer:SetText(waitedTime .. " (>=" .. queueTime .. ")")
                 else
                     elapsedQueueTimer = 0
                     self:SetScript("OnUpdate", nil)

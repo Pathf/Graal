@@ -4,6 +4,17 @@
 -- customisation : faire en sort que le fond soit transparent
 -- communication entre client pour actualisation des données
 -- faire en sorte que le chef de la horde pop quand il se fait attaquer et disparisse des le wipe
+-- date de fin d'event
+-- i18n
+
+-- WS :
+-- state de la personne qui porte le drapeau (buf pour detecter) /
+-- Timing de repop du drapeau
+-- recap des points dans la fenetre
+
+-- Arathi :
+--
+
 
 -- WTF : C:\Users\<user>\Documents\My Games\battle.net\World of Warcraft\_classic_era_\WTF
 
