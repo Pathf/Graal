@@ -73,7 +73,7 @@ calendar.ResetPvpIn = function()
     elseif dayNumber == 3 then
         days = 0
     else -- dayNumber < 3
-        days = 7 - (dayNumber + 4)
+        days = 7 - (dayNumber + 5)
     end
     local totalTimeInSeconds = (((days * 24 * 60) - ((currentHours * 60 + currentMinutes) - 6 * 60)) % (24 * 60)) * 60
     local time = BuildTime(totalTimeInSeconds * 1000)

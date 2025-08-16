@@ -19,6 +19,12 @@
         "time",
         "GetBattlefieldEstimatedWaitTime",
         "GetBattlefieldTimeWaited",
-        "IsShiftKeyDown"
+        "IsShiftKeyDown",
+        "GetLocale",
+        "include",
+        "IsEveryoneAssistant",
+        "SetEveryoneIsAssistant",
+        "UnitIsGroupLeader",
+        "GetInstanceInfo"
     ]
 }

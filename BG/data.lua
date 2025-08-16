@@ -19,10 +19,10 @@ data.BATTLEFIELD = {
         id = "BATTLEFIELD_AV", name = "Alterac Valley", frName = "Vallée d'Alterac"
     },
     AB = {
-        id = "BATTLEFIELD_AB", name = "Arathi Basin"
+        id = "BATTLEFIELD_AB", name = "Arathi Basin", frName = ""
     },
     WG = {
-        id = "BATTLEFIELD_WG", name = "Warsong Gulsh"
+        id = "BATTLEFIELD_WG", name = "Warsong Gulsh", frName = ""
     }
 }
 
