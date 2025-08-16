@@ -6,9 +6,10 @@ local CreateButton = GRAAL.Ui.CreateButton
 local CreateText = GRAAL.Ui.CreateText
 local BOXNAME = GRAAL.BG.Data.NAMEFRAME.BG.BOX
 local BgBox = GRAAL.BG.Utils.BgBox
+local i18n = GRAAL.I18N.transform
 ---
 
-local titleText = "Graal PVP"
+local titleText = i18n("Graal PVP")
 
 local function SetLockedState(locked)
     BgBox().lockButton:SetNormalTexture(Ternary(locked, GetIcon(ICONS.CHEST_LOCK), GetIcon(ICONS.KEY)))

@@ -5,7 +5,6 @@
 -- communication entre client pour actualisation des données
 -- faire en sorte que le chef de la horde pop quand il se fait attaquer et disparisse des le wipe
 -- date de fin d'event
--- i18n
 
 -- WS :
 -- state de la personne qui porte le drapeau (buf pour detecter) /
@@ -18,12 +17,13 @@
 
 -- WTF : C:\Users\<user>\Documents\My Games\battle.net\World of Warcraft\_classic_era_\WTF
 
+local i18n = GRAAL.I18N.transform
 local Logger = GRAAL.Utils.Logger
 local ListenEvent = GRAAL.Event.ListenEvent
 local CreateMinimapButton = GRAAL.Menu.CreateMinimapButton
 
 ---------------------------------------
 
-Logger("Elle est où la poulette ?")
+Logger(i18n("Elle est où la poulette ?"))
 ListenEvent()
 CreateMinimapButton()

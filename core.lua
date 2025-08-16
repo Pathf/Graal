@@ -1,6 +1,9 @@
 GRAALSAVED = GRAALSAVED or {}
 VERSION = GetAddOnMetadata('Graal', 'version')
 GRAAL = {
+    I18N = {
+        Language = {},
+    },
     Calendar = {
         Data = {}
     },

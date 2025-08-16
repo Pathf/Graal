@@ -5,14 +5,15 @@ local CreateButton = GRAAL.Ui.CreateButton
 local GetBgBox = GRAAL.BG.Utils.BgBox
 local BgHardReset = GRAAL.BG.Utils.HardReset
 local Reset = GRAAL.Utils.Reset
+local i18n = GRAAL.I18N.transform
 ---
 
 Menu.CreateMinimapButton = function()
     local onEnter = function(self)
         GameTooltip:SetOwner(self, "ANCHOR_LEFT")
-        GameTooltip:AddLine("Graal AV (v" .. VERSION .. ")")
-        GameTooltip:AddLine("Clic gauche: Ouvrir/Fermer")
-        GameTooltip:AddLine("Clic droit: Reset")
+        GameTooltip:AddLine(i18n("Graal v{1}", VERSION))
+        GameTooltip:AddLine(i18n("Clic gauche: Ouvrir/Fermer"))
+        GameTooltip:AddLine(i18n("Clic droit: Reset"))
         GameTooltip:Show()
     end
     local onClick = function(_, button)

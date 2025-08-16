@@ -1,4 +1,5 @@
 local data = GRAAL.Data
+local i18n = GRAAL.I18N.transform
 ---
 
 data.elapsed = 0
@@ -115,36 +116,36 @@ data.TARGETINGFRAME = {
 }
 
 data.UNITS = {
-    { index = 0,  name = "Vanndar Stormpike",             color = data.COLORS.RED,    subname = "Vanndar",      icon = data.ICONS.DWARF.O },
-    { index = 1,  name = "Commandant Mortimer",           color = data.COLORS.RED,    subname = "Mortimer",     icon = data.ICONS.DWARF.M },
-    { index = 2,  name = "Commandant Duffy",              color = data.COLORS.RED,    subname = "Duffy",        icon = data.ICONS.DWARF.M },
-    { index = 3,  name = "Commandant Karl Philips",       color = data.COLORS.PURPLE, subname = "Karl Philips", icon = data.ICONS.HUMAN.M },
-    { index = 4,  name = "Capitaine Balinda Stonehearth", color = data.COLORS.BLUE,   subname = "Balinda",      icon = data.ICONS.HUMAN.F },
-    { index = 5,  name = "Lieutenant Lonadin",            color = data.COLORS.BLUE,   subname = "Lonadin",      icon = data.ICONS.NIGHTELF.M },
-    { index = 6,  name = "Commandant Randolph",           color = data.COLORS.BLUE,   subname = "Randolph",     icon = data.ICONS.NIGHTELF.M },
-    { index = 7,  name = "Lieutenant Stouthandle",        color = data.COLORS.BLUE,   subname = "Stouthandle",  icon = data.ICONS.DWARF.M },
-    { index = 8,  name = "Lieutenant Largent",            color = data.COLORS.BLUE,   subname = "Largent",      icon = data.ICONS.HUMAN.M },
-    { index = 9,  name = "Lieutenant Mancuso",            color = data.COLORS.BLUE,   subname = "Mancuso",      icon = data.ICONS.HUMAN.M },
-    { index = 10, name = "Lieutenant Spencer",            color = data.COLORS.BLUE,   subname = "Spencer",      icon = data.ICONS.HUMAN.M },
-    { index = 11, name = "Lieutenant Greywand",           color = data.COLORS.BLUE,   subname = "Greywand",     icon = data.ICONS.GNOME.M }
+    { index = 0,  name = i18n("Vanndar Stormpike"),             color = data.COLORS.RED,    subname = "Vanndar",      icon = data.ICONS.DWARF.O },
+    { index = 1,  name = i18n("Commandant Mortimer"),           color = data.COLORS.RED,    subname = "Mortimer",     icon = data.ICONS.DWARF.M },
+    { index = 2,  name = i18n("Commandant Duffy"),              color = data.COLORS.RED,    subname = "Duffy",        icon = data.ICONS.DWARF.M },
+    { index = 3,  name = i18n("Commandant Karl Philips"),       color = data.COLORS.PURPLE, subname = "Karl Philips", icon = data.ICONS.HUMAN.M },
+    { index = 4,  name = i18n("Capitaine Balinda Stonehearth"), color = data.COLORS.BLUE,   subname = "Balinda",      icon = data.ICONS.HUMAN.F },
+    { index = 5,  name = i18n("Lieutenant Lonadin"),            color = data.COLORS.BLUE,   subname = "Lonadin",      icon = data.ICONS.NIGHTELF.M },
+    { index = 6,  name = i18n("Commandant Randolph"),           color = data.COLORS.BLUE,   subname = "Randolph",     icon = data.ICONS.NIGHTELF.M },
+    { index = 7,  name = i18n("Lieutenant Stouthandle"),        color = data.COLORS.BLUE,   subname = "Stouthandle",  icon = data.ICONS.DWARF.M },
+    { index = 8,  name = i18n("Lieutenant Largent"),            color = data.COLORS.BLUE,   subname = "Largent",      icon = data.ICONS.HUMAN.M },
+    { index = 9,  name = i18n("Lieutenant Mancuso"),            color = data.COLORS.BLUE,   subname = "Mancuso",      icon = data.ICONS.HUMAN.M },
+    { index = 10, name = i18n("Lieutenant Spencer"),            color = data.COLORS.BLUE,   subname = "Spencer",      icon = data.ICONS.HUMAN.M },
+    { index = 11, name = i18n("Lieutenant Greywand"),           color = data.COLORS.BLUE,   subname = "Greywand",     icon = data.ICONS.GNOME.M }
 }
 
 data.LOCATIONS = {
     AV = {
-        { id = "b1", name = "poste de secours Stormpike",  color = data.COLORS.BLUE,  subname = "Poste secours",     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
-        { id = "b2", name = "fortin nord de Dun Baldar",   color = data.COLORS.BLUE,  subname = "F. Nord",           poiicon = data.POIICON.TOWER_RED_INFORCE },
-        { id = "b3", name = "fortin sud de Dun Baldar",    color = data.COLORS.BLUE,  subname = "F. Sud",            poiicon = data.POIICON.TOWER_RED_INFORCE },
-        { id = "b4", name = "cimetière Stormpike",         color = data.COLORS.BLUE,  subname = "C. Stormpike",      poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
-        { id = "b5", name = "fortin de l'Aile de glace",   color = data.COLORS.BLUE,  subname = "F. Aile de glace",  poiicon = data.POIICON.TOWER_RED_INFORCE },
-        { id = "b6", name = "cimetière de StoneHeart",     color = data.COLORS.BLUE,  subname = "C. StoneHeart",     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
-        { id = "b7", name = "fortin de Stoneheart",        color = data.COLORS.BLUE,  subname = "F. StoneHeart",     poiicon = data.POIICON.TOWER_RED_INFORCE },
-        { id = "w1", name = "cimetière des neiges",        color = data.COLORS.WHITE, subname = "C. Neiges",         poiicon = data.POIICON.GRAVEYARD },
-        { id = "r1", name = "cimetière de Glace-sang",     color = data.COLORS.RED,   subname = "C. Glace-sang",     poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
-        { id = "r2", name = "tour de Glace-sang",          color = data.COLORS.RED,   subname = "T. Glace-sang",     poiicon = data.POIICON.TOWER_BLUE_INFORCE },
-        { id = "r3", name = "tour de la halte",            color = data.COLORS.RED,   subname = "T. Halte",          poiicon = data.POIICON.TOWER_BLUE_INFORCE },
-        { id = "r4", name = "cimetière Frostwolf",         color = data.COLORS.RED,   subname = "C. Frostwolf",      poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
-        { id = "r5", name = "tour Frostwolf occidentale",  color = data.COLORS.RED,   subname = "T. Occidentale",    poiicon = data.POIICON.TOWER_BLUE_INFORCE },
-        { id = "r6", name = "tour Frostwolf orientale",    color = data.COLORS.RED,   subname = "T. Orientale",      poiicon = data.POIICON.TOWER_BLUE_INFORCE },
-        { id = "r7", name = "hutte de guérison Frostwolf", color = data.COLORS.RED,   subname = "Hutte de guérison", poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE }
+        { id = "b1", name = i18n("poste de secours Stormpike"),  color = data.COLORS.BLUE,  subname = i18n("Poste secours"),     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
+        { id = "b2", name = i18n("fortin nord de Dun Baldar"),   color = data.COLORS.BLUE,  subname = i18n("F. Nord"),           poiicon = data.POIICON.TOWER_RED_INFORCE },
+        { id = "b3", name = i18n("fortin sud de Dun Baldar"),    color = data.COLORS.BLUE,  subname = i18n("F. Sud"),            poiicon = data.POIICON.TOWER_RED_INFORCE },
+        { id = "b4", name = i18n("cimetière Stormpike"),         color = data.COLORS.BLUE,  subname = i18n("C. Stormpike"),      poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
+        { id = "b5", name = i18n("fortin de l'Aile de glace"),   color = data.COLORS.BLUE,  subname = i18n("F. Aile de glace"),  poiicon = data.POIICON.TOWER_RED_INFORCE },
+        { id = "b6", name = i18n("cimetière de StoneHeart"),     color = data.COLORS.BLUE,  subname = i18n("C. StoneHeart"),     poiicon = data.POIICON.GRAVEYARD_RED_INFORCE },
+        { id = "b7", name = i18n("fortin de Stoneheart"),        color = data.COLORS.BLUE,  subname = i18n("F. StoneHeart"),     poiicon = data.POIICON.TOWER_RED_INFORCE },
+        { id = "w1", name = i18n("cimetière des neiges"),        color = data.COLORS.WHITE, subname = i18n("C. Neiges"),         poiicon = data.POIICON.GRAVEYARD },
+        { id = "r1", name = i18n("cimetière de Glace-sang"),     color = data.COLORS.RED,   subname = i18n("C. Glace-sang"),     poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
+        { id = "r2", name = i18n("tour de Glace-sang"),          color = data.COLORS.RED,   subname = i18n("T. Glace-sang"),     poiicon = data.POIICON.TOWER_BLUE_INFORCE },
+        { id = "r3", name = i18n("tour de la halte"),            color = data.COLORS.RED,   subname = i18n("T. Halte"),          poiicon = data.POIICON.TOWER_BLUE_INFORCE },
+        { id = "r4", name = i18n("cimetière Frostwolf"),         color = data.COLORS.RED,   subname = i18n("C. Frostwolf"),      poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE },
+        { id = "r5", name = i18n("tour Frostwolf occidentale"),  color = data.COLORS.RED,   subname = i18n("T. Occidentale"),    poiicon = data.POIICON.TOWER_BLUE_INFORCE },
+        { id = "r6", name = i18n("tour Frostwolf orientale"),    color = data.COLORS.RED,   subname = i18n("T. Orientale"),      poiicon = data.POIICON.TOWER_BLUE_INFORCE },
+        { id = "r7", name = i18n("hutte de guérison Frostwolf"), color = data.COLORS.RED,   subname = i18n("Hutte de guérison"), poiicon = data.POIICON.GRAVEYARD_BLUE_INFORCE }
     }
 }

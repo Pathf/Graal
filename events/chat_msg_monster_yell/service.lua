@@ -5,16 +5,19 @@ local REGISTERS = GRAAL.Event.registers
 local GetBgBox = GRAAL.BG.Utils.BgBox
 local Get = GRAAL.Utils.Get
 local BATTLEFIELD = GRAAL.BG.Data.BATTLEFIELD
+local i18n = GRAAL.I18N.transform
 ---
 
-local ALLY = "Alliance"
-local HORDE = "Horde"
-local ATTACKING = "attaqué"
-local SAVED = "sauvé"
-local CAPTURED = "capturé"
-local DESTOYED = "détruit"
+local base = "chat_msg_monster_yell"
+local ALLY = i18n(base .. "Alliance")
+local ALLY_2 = i18n(base .. "Allliance")
+local HORDE = i18n(base .. "Horde")
+local ATTACKING = i18n(base .. "attaqué")
+local SAVED = i18n(base .. "sauvé")
+local CAPTURED = i18n(base .. "capturé")
+local DESTOYED = i18n(base .. "détruit")
 
-local function IsAlly(message) return string.match(message, ALLY) or string.match(message, "Allliance") end
+local function IsAlly(message) return string.match(message, ALLY) or string.match(message, ALLY_2) end
 local function IsHorde(message) return string.match(message, HORDE) end
 
 local function Who(message)
@@ -24,18 +27,12 @@ local function Who(message)
 end
 
 local function IsAttackingLocation(message)
-    return string.match(message, "Le (.+) est attaqu") or string.match(message, "La (.+) est attaqu") or
-        string.match(message, "a pris le (.+) ! Si") -- dernier = cas du cimitiere des neiges
+    return string.match(message, i18n(base .. "L([ea]) (.+) est attaqu")) or
+        string.match(message, i18n(base .. "a pris le (.+) ! Si")) -- dernier = cas du cimitiere des neiges
 end
 local function IsSavedLocation(message) return string.match(message, "Le (.+) est sauvé") end
-local function IsCapturedLocation(message)
-    return string.match(message, "Le (.+) a été pris") or
-        string.match(message, "La (.+) a été prise")
-end
-local function IsDestroyedLocation(message)
-    return string.match(message, "La (.+) a été détruite") or
-        string.match(message, "Le (.+) a été détrui")
-end
+local function IsCapturedLocation(message) return string.match(message, i18n(base .. "L([ea]) (.+) a été pri([se])")) end
+local function IsDestroyedLocation(message) return string.match(message, i18n(base .. "L([ea]) (.+) a été détru([ite])")) end
 
 local function ParseHeraldMessage(message)
     local location

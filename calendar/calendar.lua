@@ -2,8 +2,9 @@ local calendar = GRAAL.Calendar
 local data = GRAAL.Calendar.Data
 local Ternary = GRAAL.Utils.Ternary
 local BuildTime = GRAAL.Utils.BuildTime
-
+local i18n = GRAAL.I18N.transform
 ---
+
 local YEAR = date("*t").year
 
 local yearWork = {
@@ -80,7 +81,7 @@ calendar.ResetPvpIn = function()
     local hours = time.hours
     local minutes = time.minutes
 
-    local remainingDays = days .. Ternary(days > 1, " days", " day")
+    local remainingDays = days .. " " .. Ternary(days > 1, i18n("days"), i18n("day"))
     local remainingHours = Ternary(hours > 9, hours, "0" .. hours)
     local remainingMinutes = Ternary(minutes > 9, minutes, "0" .. minutes)
     return remainingDays .. ", " .. remainingHours .. "h" .. remainingMinutes

@@ -2,6 +2,7 @@ local data = GRAAL.BG.Data
 
 local COLORS = GRAAL.Data.COLORS
 local POIICON = GRAAL.Data.POIICON
+local i18n = GRAAL.I18N.transform
 ---
 
 data.NAMEFRAME = {
@@ -16,18 +17,18 @@ data.NAMEFRAME = {
 
 data.BATTLEFIELD = {
     AV = {
-        id = "BATTLEFIELD_AV", name = "Alterac Valley", frName = "Vallée d'Alterac"
+        id = "BATTLEFIELD_AV", name = i18n("Alterac Valley")
     },
     AB = {
-        id = "BATTLEFIELD_AB", name = "Arathi Basin", frName = ""
+        id = "BATTLEFIELD_AB", name = i18n("Arathi Basin")
     },
     WG = {
-        id = "BATTLEFIELD_WG", name = "Warsong Gulsh", frName = ""
+        id = "BATTLEFIELD_WG", name = i18n("Warsong Gulsh")
     }
 }
 
 data.CHIEFS = {
-    { name = "Chef d'escadrille Guse",      color = COLORS.GREEN, subname = "Guse",      icon = POIICON.TOWER, x = -50 },
-    { name = "Chef d'escadrille Jeztor",    color = COLORS.GREEN, subname = "Jeztor",    icon = POIICON.HOME,  x = 0 },
-    { name = "Chef d'escadrille Mulverick", color = COLORS.GREEN, subname = "Mulverick", icon = POIICON.FLAG,  x = 50 }
+    { name = i18n("Chef d'escadrille Guse"),      color = COLORS.GREEN, subname = "Guse",      icon = POIICON.TOWER, x = -50 },
+    { name = i18n("Chef d'escadrille Jeztor"),    color = COLORS.GREEN, subname = "Jeztor",    icon = POIICON.HOME,  x = 0 },
+    { name = i18n("Chef d'escadrille Mulverick"), color = COLORS.GREEN, subname = "Mulverick", icon = POIICON.FLAG,  x = 50 }
 }

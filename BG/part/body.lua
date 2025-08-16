@@ -1,5 +1,6 @@
 local BATTLEFIELD = GRAAL.BG.Data.BATTLEFIELD
 local BgBox = GRAAL.BG.Utils.BgBox
+local i18n = GRAAL.I18N.transform
 ---
 
 local function ShowBody(idInstance, idBg)
@@ -7,19 +8,19 @@ local function ShowBody(idInstance, idBg)
     if idBg == BATTLEFIELD.WG.id then
         bgBox.currentIdBg = BATTLEFIELD.WG.id
         bgBox.instanceID = idInstance
-        bgBox.UpdateTitle("Warsong Gulsh " .. idInstance)
+        bgBox.UpdateTitle(i18n("Warsong Gulsh {1}", idInstance))
         if not bgBox.WG:IsVisible() then bgBox.WG.ShowBody(idInstance) end
     end
     if idBg == BATTLEFIELD.AB.id then
         bgBox.currentIdBg = BATTLEFIELD.AB.id
         bgBox.instanceID = idInstance
-        bgBox.UpdateTitle("Arathi Basin " .. idInstance)
+        bgBox.UpdateTitle(i18n("Arathi Basin {1}", idInstance))
         if not bgBox.AB:IsVisible() then bgBox.AB.ShowBody(idInstance) end
     end
     if idBg == BATTLEFIELD.AV.id then
         bgBox.currentIdBg = BATTLEFIELD.AV.id
         bgBox.instanceID = idInstance
-        bgBox.UpdateTitle("Alterac Valley " .. idInstance)
+        bgBox.UpdateTitle(i18n("Alterac Valley {1}", idInstance))
         if not bgBox.AV:IsVisible() then bgBox.AV.ShowBody(idInstance) end
     end
 end

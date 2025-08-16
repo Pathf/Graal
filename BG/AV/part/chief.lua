@@ -1,6 +1,7 @@
 local av = GRAAL.BG.AV
 local CreateIcon = GRAAL.Ui.CreateIcon
 local CHIEFS = GRAAL.BG.Data.CHIEFS
+local i18n = GRAAL.I18N.transform
 
 --
 
@@ -21,7 +22,7 @@ local function CreateChief(chief, frameParent)
     end)
     chiefIcon:SetScript("OnEnter", function(self)
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Chief " .. chief.subname .. " has not been saved", 1, 1, 1)
+        GameTooltip:SetText(i18n("Chief {1} has not been saved", chief.subname), 1, 1, 1)
         GameTooltip:Show()
     end)
     chiefIcon:SetScript("OnLeave", function()

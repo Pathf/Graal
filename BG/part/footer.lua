@@ -4,6 +4,7 @@ local Calendar = GRAAL.Calendar
 local BuildTime, TimeSession = GRAAL.Utils.BuildTime, GRAAL.Utils.timeSession
 local CreateText = GRAAL.Ui.CreateText
 local BgBox, GetTimeInBGString = GRAAL.BG.Utils.BgBox, GRAAL.BG.Utils.GetTimeInBGString
+local i18n = GRAAL.I18N.transform
 ---
 
 local function GetHonorPerHour(timeSinceStartSession)
@@ -18,7 +19,7 @@ local function CreateHonorDuringGame()
         font = "GameFontHighlight",
         point = { xf = "BOTTOMLEFT", yf = "BOTTOMLEFT", x = 15, y = 15 },
         color = COLORS.YELLOW_TITLE,
-        text = "Honor: " .. HONOR.duringGame,
+        text = i18n("Honor: {1}", HONOR.duringGame),
         hide = false
     })
     honorDuring:SetScript("OnEnter", function(self)
@@ -26,10 +27,10 @@ local function CreateHonorDuringGame()
         local honorPerHour = GetHonorPerHour(timeSinceStartSession)
         local honorWeek = Get("HonorFrameThisWeekContributionValue"):GetText()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Honor stats", 1, 1, 1)
-        GameTooltip:AddLine("Honor week: " .. honorWeek, 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Honor/h: " .. honorPerHour, 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Time since refresh: " .. timeSinceStartSession.inText(), 0.8, 0.8, 0.8)
+        GameTooltip:SetText(i18n("Honor stats"), 1, 1, 1)
+        GameTooltip:AddLine(i18n("Honor week: {1}", honorWeek), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine(i18n("Honor/h: {1}", honorPerHour), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine(i18n("Time since refresh: {1}", timeSinceStartSession.inText()), 0.8, 0.8, 0.8)
         GameTooltip:Show()
     end)
     honorDuring:SetScript("OnLeave", function()
@@ -45,17 +46,17 @@ local function CreatePastTimer()
         point = { xf = "BOTTOMRIGHT", yf = "BOTTOMRIGHT", x = -10, y = 15 },
         color = COLORS.YELLOW_TITLE,
         hide = false,
-        text = "Calendar"
+        text = i18n("Calendar")
     })
     pastTimer:SetScript("OnEnter", function(self)
         local currentEvent = Calendar.CurrentEvent()
         local eventFinishIn = Calendar.ResetPvpIn()
         local nextEvent = Calendar.NextEvent()
         GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText("Calendar of Events", 1, 1, 1)
-        GameTooltip:AddLine("Current Event: " .. Ternary(currentEvent, currentEvent, "None"), 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Next Event: " .. Ternary(nextEvent, nextEvent, "None"), 0.8, 0.8, 0.8)
-        GameTooltip:AddLine("Reset PVP in " .. eventFinishIn, 0.8, 0.8, 0.8)
+        GameTooltip:SetText(i18n("Calendar of Events"), 1, 1, 1)
+        GameTooltip:AddLine(i18n("Current Event: {1}", Ternary(currentEvent, currentEvent, i18n("None"))), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine(i18n("Next Event: {1}", Ternary(nextEvent, nextEvent, i18n("None"))), 0.8, 0.8, 0.8)
+        GameTooltip:AddLine(i18n("Reset PVP in {1}", eventFinishIn), 0.8, 0.8, 0.8)
         GameTooltip:Show()
     end)
     pastTimer:SetScript("OnLeave", function()
@@ -66,7 +67,7 @@ end
 
 local function UpdateHonorDuringGame(newHonor)
     HONOR.duringGame = newHonor
-    BgBox().honorDuringGame:SetText("Honor: " .. newHonor)
+    BgBox().honorDuringGame:SetText(i18n("Honor: {1}", newHonor))
 end
 
 local function TimeInText(milliseconds)
@@ -110,7 +111,7 @@ local function UpdateTime(index)
         end)
     elseif index == -1 then
         GetQueueTimerFrame():SetScript("OnUpdate", nil)
-        bgBox.timer.UpdateText("Calendar")
+        bgBox.timer.UpdateText(i18n("Calendar"))
     end
 end
 

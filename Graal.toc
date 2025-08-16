@@ -7,6 +7,10 @@
 
 core.lua
 
+i18n/default_enUS.lua
+i18n/frFR.lua
+i18n/service.lua
+
 data.lua
 utils.lua
 
@@ -33,7 +37,9 @@ BG/bgBox.lua
 events/addon_loaded.lua
 events/update_battlefield_status.lua
 events/chat_msg_combat_honor_gain.lua
-events/chat_msg_monster_yell.lua
+events/chat_msg_monster_yell/enUs.lua
+events/chat_msg_monster_yell/frFR.lua
+events/chat_msg_monster_yell/service.lua
 events/chat_msg_bg_system_alliance.lua
 events/chat_msg_bg_system_horde.lua
 events/player_entering_world.lua

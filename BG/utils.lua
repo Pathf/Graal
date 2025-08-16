@@ -3,6 +3,7 @@ local bgData = GRAAL.BG.Data
 local Ternary = GRAAL.Utils.Ternary
 local Get = GRAAL.Utils.Get
 local BATTLEFIELD = GRAAL.BG.Data.BATTLEFIELD
+local i18n = GRAAL.I18N.transform
 ---
 
 local bgBoxIntern
@@ -28,7 +29,7 @@ utils.GetTimeInBGString = function()
         local secondesBeforeStart = 123 - (time.minutes * 60 + time.seconds)
         time.minutes = math.floor(secondesBeforeStart / 60)
         time.seconds = secondesBeforeStart % 60
-        beforeText = "Start in "
+        beforeText = i18n("Start in ")
     end
     return beforeText .. Ternary(
         time.minutes > 0,
@@ -47,9 +48,9 @@ utils.SetHonorGame = function(newHonor)
 end
 
 local function GetBattleGround(mapName)
-    if mapName == BATTLEFIELD.WG.frName then return BATTLEFIELD.WG.id end
-    if mapName == BATTLEFIELD.AB.frName then return BATTLEFIELD.AB.id end
-    if mapName == BATTLEFIELD.AV.frName then return BATTLEFIELD.AV.id end
+    if mapName == BATTLEFIELD.WG.name then return BATTLEFIELD.WG.id end
+    if mapName == BATTLEFIELD.AB.name then return BATTLEFIELD.AB.id end
+    if mapName == BATTLEFIELD.AV.name then return BATTLEFIELD.AV.id end
 end
 
 utils.SetBgGame = function(index, mapName)
