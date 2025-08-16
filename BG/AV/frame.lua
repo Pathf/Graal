@@ -51,7 +51,16 @@ local function HideBody()
     avFrame:Hide()
 end
 
+local function UpdateEveryoneIsAssistant()
+    local _, instanceType = GetInstanceInfo()
+    if not IsEveryoneAssistant() and UnitIsGroupLeader("player") and instanceType == "pvp" then
+        SetEveryoneIsAssistant(true)
+        Logger("SetEveryoneIsAssistant")
+    end
+end
+
 local function Update()
+    UpdateEveryoneIsAssistant()
     avFrame.UpdateAllBossHealth(avFrame)
     avFrame.UpdateChief(avFrame.chiefIcons)
     BgBox().UpdateTime()
