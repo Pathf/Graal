@@ -42,7 +42,6 @@ events/chat_msg_monster_yell/frFR.lua
 events/chat_msg_monster_yell/service.lua
 events/chat_msg_bg_system_alliance.lua
 events/chat_msg_bg_system_horde.lua
-events/player_entering_world.lua
 events.lua
 
 menu.lua
